@@ -10,7 +10,7 @@ Constants in Ruby are much more than just fixed values. ==Ruby's use of constant
 
 **Constant Lookup:** Ruby has a sophisticated constant lookup mechanism. When you reference a constant, Ruby searches for it in the current module, then in its ancestors (modules included into the current module or class), and finally in the global scope (`Object`). This lookup path supports Ruby's flexible and dynamic module and class composition.
 
-==**Ruby's standard library and core classes** (like`Array`, `Hash`， `String`, etc.) are all organised as constants within the Ruby interpreter.== This makes them readily available to Ruby programs without requiring explicit imports.
+==**Ruby's standard library and core classes** (like `Array`, `Hash`， `String`, etc.) are all organised as constants within the Ruby interpreter.== This makes them readily available to Ruby programs without requiring explicit imports.
 
 **Lazy Loading and Memory Management**: By using constants and autoload, Ruby can manage memory more efficiently, loading only the necessary parts of the standard library or gems when they are actually needed.
 
