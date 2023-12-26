@@ -1,6 +1,6 @@
 # Constant
 
-Constants in Ruby are much more than just fixed values. Ruby's use of constants is a fundamental aspect of its design and operation. They are an integral part of the language's architecture, contributing to its organisation, flexibility, and dynamic capabilities. This approach supports Ruby's philosophy of making programmers happy by providing an elegant, readable, and efficient way to write code.
+Constants in Ruby are much more than just fixed values. ==Ruby's use of constants is a fundamental aspect of its design and operation. They are an integral part of the language's architecture==, contributing to its organisation, flexibility, and dynamic capabilities. This approach supports Ruby's philosophy of making programmers happy by providing an elegant, readable, and efficient way to write code.
 
 **Organising Code**: ==In Ruby, classes and modules are constants.== This means when you define a class like `class MyClass; end`, `MyClass` is actually a constant that holds a reference to the class object. This is a key aspect of Ruby's object model.
 
