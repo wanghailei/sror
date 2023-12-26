@@ -1,8 +1,10 @@
 # Authentication
 
-WHL: Where the authorisation logic should be defined, in the Controller or the Model?
 
-ChatGPT: Authorisation logic can be defined in both the Controller and the Model, depending on the complexity of your application and the level of granularity you need. However, it's a common practice to handle most of the authorisation logic at the Controller level.
+
+**WHL: Where the authorisation logic should be defined, in the Controller or the Model?**
+
+**ChatGPT**: Authorisation logic can be defined in both the Controller and the Model, depending on the complexity of your application and the level of granularity you need. However, ==it's a common practice to handle most of the authorisation logic at the Controller level.==
 
 Controller Level: The Controller is typically where you'd check if a user is authorised to perform a certain action. For instance, before updating a resource, the Controller could check if the current user has the necessary permissions. This is because Controllers handle user inputs and interactions, making them a good place for such checks.
 
