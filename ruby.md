@@ -174,8 +174,10 @@ In this way, Ruby simplifies its model of the world by treating everything as an
 
 ## Class
 
-Classes are, at heart, a way to organise objects and methods.\
-<mark style="background-color:red;">% 與其說 organise，毋寧說 define 或 design，可以說是「藍圖」。 20231117%</mark>
+Classes are, at heart, a way to organise objects and methods.
+==% 與其說 organise，毋寧說 define 或 design，可以說是「藍圖」。 20231117%==
+
+==% 定義一個 Class，就像「開模」來製造一個銅盤一樣。20230624 %==
 
 Defining a class lets you group behaviours (methods) into convenient bundles, so that you can quickly create many objects that behave essentially the same way.
 
@@ -191,7 +193,7 @@ _Object_ is a built-in Ruby class.
 
 Classes are named with constants.
 
-% 定義一個 Class，就像「開模」來製造一個銅盤一樣。20230624 %
+
 
 ### Methods
 

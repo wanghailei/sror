@@ -1,6 +1,6 @@
 # Database
 
-## Using the same database for all environments.
+## ==Using the same database for all environments.==
 
 It's generally not recommended to use different databases for development and production in a Rails app. Something that works in SQLite may not work in PostgreSQL and vice versa. Using different databases can expose your app to potential database-specific bugs only in production.
 
@@ -27,7 +27,93 @@ Which can be found in the database configuration file located at config/database
 
 
 
+## Configuring Database for a Rails app
 
+#### 3.1 database.yml for configuring database connection.
+
+You'll need to specify your PostgreSQL username, password, host, and database name for the development, test, and production environments.
+
+Make sure not to include sensitive data like your database password directly in the database.yml file. Instead, use environment variables to store sensitive data.
+
+default: \&default
+
+adapter: postgresql
+
+encoding: unicode
+
+username: myuser
+
+password: mypassword
+
+pool: <%= ENV.fetch("RAILS\_MAX\_THREADS") { 5 } %>
+
+development:
+
+<<: \*default
+
+database: myapp\_development
+
+test:
+
+<<: \*default
+
+database: myapp\_test
+
+\# In Rails, drop and recreate the PostgreSQL database:
+
+rake db:drop
+
+rake db:create
+
+#### 3.2 Setup PostgreSQL for Rails on macOS
+
+Install PostgreSQL:
+
+brew install postgresql@16
+
+You will need to manage the server on its own, setting up the user(s) and database(s) before connecting them to Rails.
+
+Homebrew starts the server and creates a default database named postgres automatically upon installation.
+
+You can check your server status by:
+
+brew services list
+
+To start, stop or restart a Postgre server:
+
+brew services start postgresql@16
+
+brew services stop postgresql@16
+
+brew services restart postgresql@16
+
+\# If you don't want/need a background service you can just run:
+
+/opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14
+
+#### 3.3 Create databases for Rails environments
+
+\# Create databases for Rails development and test, with the "psql" tool.
+
+psql postgres
+
+CREATE DATABASE appname\_development;
+
+CREATE DATABASE appname\_test;
+
+\# Create a database superuser and set password.
+
+CREATE USER dillone WITH SUPERUSER ENCRYPTED PASSWORD 'Mac2Milan\_\_';
+
+ALTER DATABASE appname\_development OWNER TO dillone;
+
+ALTER DATABASE appname\_test OWNER TO dillone;
+
+\# Copy data from SQLite3 to PostgreSQL with "sequel" tool.
+
+\# Make sure the PostgreSQL database is empty before running the sequel command.
+
+bundle exec sequel -C sqlite://db/development.sqlite3 postgres://dillone:Mac2Milan\_\_@localhost/depot\_development
 
 # PostgreSQL vs MySQL
 
