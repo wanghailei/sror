@@ -13,11 +13,11 @@
 
 
 
+## Upgrade the Ruby environment of macOS
 
 
-****
 
-## Upgrade Ruby to the latest version on macOS
+### Update Ruby with `brew`
 
 **Update Homebrew** to make sure it has the latest formulae for Ruby.&#x20;
 
@@ -32,7 +32,37 @@ $ brew upgrade ruby
 $ brew upgrade ruby@3.3.0 // or to a specific version.
 ```
 
+% 我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不啟用`rbenv`。 %
 
+### Update Ruby with `rbenv`
+
+```bash
+# list latest stable versions:
+rbenv install -l
+
+# list all local versions:
+rbenv install -L
+
+# install a Ruby version:
+rbenv install 3.3.0
+
+# make 3.3.0 the defaul version on macOS
+rbenv global 3.3.0
+```
+
+After `rbenv install` and `rbenv global`, the ~/.zshrc need to be modified for `ruby` to take effect:
+
+```bash
+if command -v rbenv > /dev/null; then
+	eval "$(rbenv init -)"
+fi
+```
+
+
+
+
+
+****
 
 ## Bundler
 
@@ -54,26 +84,29 @@ After the gems have been installed, Bundler can help you update them when new ve
 
 
 
-## Upgrade Rails and all gems to the newest version on macOS 
-
-```bash
-$ gem update // updates all gems installed
-$ gem update rails // updates a particular gem
-```
-
-
-
 ## RubyGems
 
 RubyGems is a package management framework for Ruby. Commonly gems are used to distribute **reusable functionality** that is shared with other Rubyists for use in their applications and libraries.
 
 The RubyGems software allows you to easily download, install, and use ruby software packages on your system. The software package is called ==a “gem” which contains a packaged Ruby application or library.==
 
-#### To update to its latest version with
+#### Update RubyGems itself to the latest version on macOS
 
 ```bash
 $ gem update --system
 ````
+
+#### Upgrade all installed gems to the latest version on macOS
+
+```bash
+$ gem update
+```
+
+#### Upgrade a particular gem installed on macOS
+
+```bash
+$ gem update rails // updates a  gem
+```
 
 #### Error: can't find gem bundler (= 2.4.13) with executable bundle
 
@@ -109,23 +142,21 @@ $ gem cleanup
 
 
 
-****
-
-# Upgrade a Rails app
+## Upgrade a Rails app
 
 
 
-## Verify the Rails version of an app
+### Verify the Rails version of an app
 
 ==Note that the terminal commands will work only when you are inside the Rails application directory, otherwise, it will display the latest installed version of Rails on your system.== If the application is using a different version specified in the Gemfile, it may not be accurate.
 
 1\. Via the Gemfile.lock: The Gemfile.lock in a Rails application specifies the exact versions of each gem that the application is using. Look for the line specifying the rails gem version in this file.
 
-2\. Via the command line:cIn the terminal, navigate to the directory of your Rails app and use the command `rails -v` . This will display the current version of Rails the application is using.
+2\. Via the command line: In the terminal, navigate to the directory of your Rails app and use the command `rails -v` . This will display the current version of Rails the application is using.
 
 3\. Via the Rails console: Another option is to open the Rails console with the command rails console or `rails c`, then print the Rails version with `Rails.version`.
 
-## Upgrade the Rails version of an app
+### Upgrade the Rails version of an app
 
 Frist step: Update the gem and its dependencies. Modify the Rails gem version in your Gemfile, then run:
 
@@ -141,15 +172,36 @@ Make sure the app's configuration and boilerplate code are up-to-date with the n
 $ bin/rails app:update
 ```
 
-## Gemfile
+### Gemfile
 
 A Gemfile describes the gem dependencies required to execute associated Ruby code. A Gemfile is evaluated as Ruby code. Place the Gemfile in the root of the directory containing the associated code.
 
 ==The Gemfile is indeed related to Bundler and not directly to RubyGems itself.==
 
+```ruby
+gem "rails", "~> 7.1.2"
+```
 
+The `gem` method is used to declare a gem dependency for your application. 
 
-## Upgrade the Bundler version of an app
+This line says that the application depends on the "rails" gem, and requires a version that's compatible with version 7.1.2.
+
+==The "`~> 7.1.2`" is a version specifier, also known as a pessimistic version constraint. This means that Bundler will update the Rails gem to the latest minor or patch version==, but not to a new major version (which could potentially include breaking changes). For example, with this constraint, Bundler could update Rails to version 7.1.3 or 7.2.0, but not to 8.0.0.
+
+```ruby
+gem "pg"
+```
+
+==The `gem` command without a version specifier tells Bundler to install the most up-to-date version of the gem that's compatible with your project.== Bundler will try to get the latest version of the gem that is compatible with all other gems in the Gemfile, taking into account all the requirements specified in your application's codebase.
+
+`gem 'pg', '>= 1.1.0'` : install any version greater than or equal to 1.1.0
+`gem 'pg', '1.1.0'`    : install exactly version 1.1.0
+`gem 'pg', '~> 1.1.0'`   : install the latest version of the 1.x series 
+			(greater than or equal to version 1.1 but less than version 2.0) .
+
+Remember to run bundle install after you update your Gemfile to install the required versions of each gem.
+
+### Upgrade the Bundler version of an app
 
 It's important to ensure that the newer Bundler version is compatible with your Rails 7 app and other gem dependencies.&#x20;
 
@@ -177,7 +229,7 @@ It's important to ensure that the newer Bundler version is compatible with your 
 
 
 
-## Upgrade the gems versions of an app&#x20;
+### Upgrade the gems versions of an app&#x20;
 
 1. Start by updating your `Gemfile`. For each gem, specify the latest version compatible with Rails 7. You might need to check each gem's documentation or repository for compatibility information.\
    ==Update  gems incrementally. Avoid updating all gems at once==, as this can introduce multiple breaking changes that are hard to debug. ==Update one or a few gems at a time==, then test your application to ensure it still works as expected.

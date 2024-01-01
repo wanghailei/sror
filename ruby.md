@@ -14,7 +14,15 @@ Blocks, Procs, and Lambdas: Ruby features first-class support for "blocks" of co
 
 
 
-***
+## OO
+
+**Encapsulation** describes the fact that an object contains both its own data and the methods required to manipulate that data.
+
+**Polymorphism** describes the ability to have ==different classes containing methods with the same name==. The same “message” can be sent to different objects, and ==each different object responds differently to the same message with its own special method==. For example, the same messsage or command "talk" is sent to a cat and a dog, and the cat and the dog responds differently to this message.
+
+
+
+
 
 ### Concepts
 
@@ -48,11 +56,11 @@ let 類型的容器，是放進去就再也更改不了的，叫做「非換裝�
 
 ### Type 形態 / 形式 / 模樣 / 形狀
 
-<mark style="background-color:red;">我認為 type 翻譯成「形態」/「型態」比較合適，甚至叫「形狀」或「模樣」都很好。因為一個 type 確實表現的是一段代碼的構成樣式、形狀、構造，如果這種樣式經常被看到，就可以抽象出來，並起一個名字，也就是稱之為「某型代碼」或「某種形態代碼」。這跟虎形、鶴形；可愛型、性感型，其實是一個道理。</mark>
+==我認為 type 翻譯成「形態」/「型態」比較合適，甚至叫「形狀」或「模樣」都很好。因為一個 type 確實表現的是一段代碼的構成樣式、形狀、構造，如果這種樣式經常被看到，就可以抽象出來，並起一個名字，也就是稱之為「某型代碼」或「某種形態代碼」。這跟虎形、鶴形；可愛型、性感型，其實是一個道理。==
 
-<mark style="background-color:red;">形，外形、姿態、容貌、樣式等意，例如：形勢、形色、形式等。型，器物的模樣，引申為某種標準，型式、典範、態度、風格之意。例如：模型、典型。二字意思相近，有字典謂兩字相通。所以，凡與外貌有關的，用「形」字；凡人工鑄造出來的，或引申事物表現的格調，用「型」字。</mark>
+==形，外形、姿態、容貌、樣式等意，例如：形勢、形色、形式等。型，器物的模樣，引申為某種標準，型式、典範、態度、風格之意。例如：模型、典型。二字意思相近，有字典謂兩字相通。所以，凡與外貌有關的，用「形」字；凡人工鑄造出來的，或引申事物表現的格調，用「型」字。==
 
-<mark style="background-color:red;">英文的「形」為shape；英文的「型」為type、style。</mark>
+==英文的「形」為shape；英文的「型」為type、style。==
 
 In any programming language there are two main categories of types: primitive and composite. Primitive types are atomic, i.e., they are not formed by the combination of other types. 基本的型態Composite types are made of other types, either primitive or composite. 複合的型態
 
@@ -82,7 +90,7 @@ A value type is a type whose value is copied when it’s assigned to a variable 
 
 Unlike value types, reference types are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used.
 
-<mark style="background-color:orange;">Classes are reference types.</mark>
+==Classes are reference types.==
 
 ### Size of a Data Type ( a data's type / a value's type :-))
 
@@ -105,7 +113,7 @@ Consistent: In Ruby, everything is an object, and all of those objects have meth
 
 Metaprogramming: Ruby has robust metaprogramming capabilities. This means you can write code that generates other code, making Ruby very powerful and flexible.
 
-Blocks, Procs, and Lambdas: Ruby features first-class support for "blocks" of code and makes it easy to pass these blocks around your program. This feature is heavily used in Ruby for handling everything from basic iteration to customising how complex objects behave.\
+Blocks, Procs, and Lambdas: Ruby features first-class support for "blocks" of code and makes it easy to pass these blocks around your program. This feature is heavily used in Ruby for handling everything from basic iteration to customising how complex objects behave.
 
 
 \# A block is simply a chunk of code, and it may have arguments.
@@ -168,144 +176,7 @@ In this way, Ruby simplifies its model of the world by treating everything as an
 
 
 
-
-
-***
-
-## Class
-
-Classes are, at heart, a way to organise objects and methods.
-==% 與其說 organise，毋寧說 define 或 design，可以說是「藍圖」。 20231117%==
-
-==% 定義一個 Class，就像「開模」來製造一個銅盤一樣。20230624 %==
-
-Defining a class lets you group behaviours (methods) into convenient bundles, so that you can quickly create many objects that behave essentially the same way.
-
-Everything you handle in Ruby is either an object or a construct that evaluates to an object, and every object is an instance of some class.
-
-When you use the dot notation on a class, you send a message to the class. Classes can respond to messages.
-
-Ruby is about objects, and objects are instances of classes.
-
-Classes are objects.
-
-_Object_ is a built-in Ruby class.
-
-Classes are named with constants.
-
-
-
-### Methods
-
-Methods defined inside a class and intended for use by all instances of the class, are called instance methods.
-
-Methods that you define for one particular object are called singleton methods.
-
-### Variable 承值容器（可更换值的）
-
-\#AppleScript: Variables are what we use to store objects when we aren’t working with them. Think of a variable as a box. Whenever a script has an object that it will need to use again later, it can put it in this box for safe storage while it goes off and does other things. Later on, when it needs to use that object again, it can retrieve it just by finding the box it put it in earlier. To make these storage boxes easy to identify, each one has its own name, or identifier.
-
-WHL: If a variable is like container, say a bottle, I think, this bottle has two info on it: a name of the value, and a memory address of the value. Right?
-
-GitHub Copilot: Yes, you are correct. In most programming languages, including C and Ruby, a variable can be thought of as a container that holds a value in memory.
-
-So in your analogy, the bottle can be thought of as a container that holds a value, and it has two pieces of information associated with it: the name of the value (which is like the variable name), and the memory address where the value is stored (which is like the location of the bottle).
-
-#### Instance Variable 實例變量 / 某實體中的一個值容器
-
-Ruby objects/instances come with their own storage and retrieval mechanisms for values: instance variables. The instance variable enables individual objects to remember state.
-
-Instance variables are only visible to the instance to which they belong.
-
-An instance variable initialised in one method inside a class can be used by any instance method defined within that class.
-
-Instance variable names always start with a single @ (at sign).
-
-An instance variable retains the value assigned to it even after the method in which it was initialised has terminated. This property of instance variables - their survival across method calls — makes them suitable for maintaining state in an object.
-
-You can change any instance variable’s value in any method.
-
-
-
-GitHub Copilot: Class variables are typically defined at the class level, outside of any methods. For example:
-
-class MyClass
-
-&#x20; @@class\_variable = "Hello, world!"
-
-end
-
-The initialize method is used to define instance variables.
-
-The initialize method is called when a new instance of the class is created. For example:
-
-class MyClass
-
-&#x20; def initialize(instance\_variable)
-
-&#x20;   @instance\_variable = instance\_variable
-
-&#x20; end
-
-end
-
-In this example, we define a class called MyClass with an initialize method that takes an argument called instance\_variable. Within the initialize method, we define an instance variable called @instance\_variable and set its value to the value of the instance\_variable argument.
-
-GitHub Copilot:
-
-In Ruby, an instance variable defined outside of the initialize method is not a class instance variable, but rather an instance variable that is shared by all methods of the class. This is in contrast to class instance variables, which are defined at the class level and are shared by all instances of the class.
-
-Here's an example of how you could define an instance variable and a class instance variable in Ruby:
-
-class MyClass
-
-@class\_instance\_variable = "Hello, world!"
-
-def initialize(instance\_variable)
-
-@instance\_variable = instance\_variable
-
-end
-
-def say\_hello
-
-puts @class\_instance\_variable
-
-puts @instance\_variable
-
-end
-
-end
-
-\# Create two instances of the class
-
-my\_instance\_1 = MyClass.new("Instance 1")
-
-my\_instance\_2 = MyClass.new("Instance 2")
-
-\# Call the method on each instance
-
-my\_instance\_1.say\_hello # Output: "Hello, world!" and "Instance 1"
-
-my\_instance\_2.say\_hello # Output: "Hello, world!" and "Instance 2"
-
-So to answer your question, an instance variable defined outside of the initialize method is not a class instance variable, but rather an instance variable that is shared by all methods of the class. An instance variable defined inside the initialize method is a regular instance variable that is unique to each instance of the class.
-
-GitHub Copilot: In Ruby, an instance variable defined outside of the initialize method is not a class instance variable, but rather an instance variable that is shared by all methods of the class. This is in contrast to class instance variables, which are defined at the class level and are shared by all instances of the class.
-
-Here's a table that compares class variables, instance variables, and class instance variables in Ruby:
-
-| Variable Type                     | Definition                                                                                           | Scope                                                  | Shared by Subclasses | Prefix |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | -------------------- | ------ |
-| <p>Class<br>Variable</p>          | A variable that is shared by all instances of a class and its subclasses.                            | Defined at the class level, outside of any methods.    | Yes                  | @@     |
-| Instance Variable                 | A variable that is unique to each instance of a class.                                               | Defined within methods, such as the initialize method. | No                   | @      |
-| <p>Class<br>Instance Variable</p> | A variable that is shared by all instances of a class, but is not shared by subclasses of the class. | Defined at the class level, outside of any methods.    | No                   | @      |
-
-
-
-**Encapsulation** describes the fact that an object contains both its own data and the methods required to manipulate that data.
-
-**Polymorphism** describes the ability to have different classes containing methods with the same name. The same “message” (such as talk) can be sent to different objects (such as cats and dogs), and each different object responds differently to the same message with its own special method (here the talk method).&#x20;
+&#x20;
 
 ### Number
 
@@ -315,3 +186,10 @@ Keep in mind that most of the arithmetic operators you see in Ruby are methods. 
 
 If you define, say, a method called + in a class of your own, you can use the operator’s syntactic sugar.\
 And if you see arithmetic operators behaving weirdly, it may be that someone has redefined their underlying methods.
+
+
+
+`# frozen_string_literal: true`: This line is a magic comment in Ruby. It tells Ruby to freeze all string literals in the file. Freezing a string makes it immutable, meaning it can't be modified.
+
+***
+

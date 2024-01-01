@@ -15,7 +15,7 @@ State Representation: It represents the data and the rules (business logic) that
 
 Database Communication: The Model is responsible for all interactions with the database, namely CRUD. The Model uses an Object-Relational Mapping (ORM) system to abstract the low-level database commands into higher-level programming language methods or functions.
 
-The purpose of separating these responsibilities into a Model component is to isolate the business logic and data manipulation logic of an application. Changes in the graphical user interface (handled by the View) or changes in the way user inputs are processed (handled by the Controller) do not affect the business rules or the database communication logic, and vice versa.
+==The purpose of separating these responsibilities into a Model component is to isolate the business logic and data manipulation logic of an application.== Changes in the graphical user interface (handled by the View) or changes in the way user inputs are processed (handled by the Controller) do not affect the business rules or the database communication logic, and vice versa.
 
 
 
@@ -23,7 +23,7 @@ The purpose of separating these responsibilities into a Model component is to is
 
 The Model interacts with the database through an Object-Relational Mapping (ORM) system, like ActiveRecord. Here's a more detailed breakdown of the process:
 
-<mark style="background-color:orange;">When a Controller needs to interact with data, it asks the Model to do so. The Model uses ActiveRecord methods to create SQL queries.</mark>
+==When a Controller needs to interact with data, it asks the Model to do so. The Model uses ActiveRecord methods to create SQL queries.==
 
 * ActiveRecord then sends the SQL query to the database for execution.
 * The database returns the data, and ActiveRecord converts this raw data into Ruby objects that the application can work with. These objects are instances of the Model class. For example, each row in the users table is represented as an instance of the User model.
@@ -34,13 +34,13 @@ ActiveRecord also handles relationships between different models (like has\_many
 
 Before writing data back to the database, ActiveRecord performs any validations defined in the Model. If the data is invalid (for example, if a required field is missing), the save or update operation is cancelled, and the invalid data is not written to the database.
 
-<mark style="background-color:orange;">So while it seems like the Model is communicating directly with the database, it's actually ActiveRecord that does most of the work behind the scenes.</mark>
+==So while it seems like the Model is communicating directly with the database, it's actually ActiveRecord that does most of the work behind the scenes.==
 
 
 
 **WHL: Are the states of the business represented by the Model stored in the RAM of the server?**
 
-ChatGPT: The Model in an MVC architecture doesn't typically store business state in server RAM in the way that you might be imagining. Instead, the Model represents the structure of the data and the rules for interacting with that data. <mark style="background-color:orange;">The actual data, or "state", is usually stored in a database.</mark>
+ChatGPT: The Model in an MVC architecture doesn't typically store business state in server RAM in the way that you might be imagining. Instead, the Model represents the structure of the data and the rules for interacting with that data. ==The actual data, or "state", is usually stored in a database.==
 
 However, when your application is running and an instance of a Model is created, that instance and its data are temporarily stored in the server's RAM. This data remains in RAM only for the duration of the request. Once the request is completed and the response has been sent, the data for that request is discarded to free up memory for other requests. Persistent storage is managed by the database.
 
@@ -56,7 +56,7 @@ Active Record was described by Martin Fowler in his book _Patterns of Enterprise
 
 In Active Record, objects carry both persistent data and behaviour which operates on that data.
 
-<mark style="background-color:orange;">Active Record automatically defines model attributes for every table column, so you don't have to declare those attributes in your model file.</mark>
+==Active Record automatically defines model attributes for every table column, so you don't have to declare those attributes in your model file.==
 
 Active Record gives us several mechanisms, the most important being the ability to:
 
@@ -246,7 +246,7 @@ The granularity of migrations depends on the context and the nature of the chang
 
 2\. Keep Them Small: Small migrations are easier to understand and less likely to cause problems. If you have a big change to make, consider whether it can be broken down into smaller, incremental steps.
 
-3\. Don't Mix Schema Changes with Data Manipulation: As discussed earlier, mixing schema changes with data manipulation in the same migration can lead to problems and should generally be avoided. It's usually better to handle data manipulation separately, for example, using a rake task or a script. <mark style="color:blue;">% 根本就不要用 migration 去改數據。20230621 %</mark>
+3\. Don't Mix Schema Changes with Data Manipulation: As discussed earlier, mixing schema changes with data manipulation in the same migration can lead to problems and should generally be avoided. It's usually better to handle data manipulation separately, for example, using a rake task or a script. <mark style="color:blue;">% 根本就不要用 migration 去改數據。20230621 %==
 
 4\. Avoid Dependencies Between Migrations: Each migration should be able to run independently of other migrations. This means you shouldn't write a migration that depends on a specific column being present in a table unless that column is added in the same migration.
 
@@ -267,7 +267,7 @@ Keep in mind that over time, your database schema will evolve and change. That's
 
 **WHL: If I use '`rails generate migration`' command to generate the initial migration, it might look like a very long command line. Is this a good practice? Or I'd better generate with multiple commands, each for only one table/model?**
 
-ChatGPT: While you could technically generate an entire set of tables with one \`rails generate migration\` command, <mark style="background-color:orange;">it's generally better practice to split your schema creation into multiple commands, each focused on one model or table.</mark>
+ChatGPT: While you could technically generate an entire set of tables with one \`rails generate migration\` command, ==it's generally better practice to split your schema creation into multiple commands, each focused on one model or table.==
 
 This has several advantages:
 
