@@ -63,32 +63,48 @@ The singleton class is a core aspect of Ruby's object-oriented design, which emp
 
 
 
+
+
 ***
 
-## Methods
+## **`class << self`**
 
-Methods defined inside a class and intended for use by all instances of the class, are called instance methods.
+This syntax is used to define class methods within the block. It opens up the singleton class of the current class, allowing you to define methods that will be available on the class itself, rather than on instances of the class.
 
-Methods that you define for one particular object are called singleton methods.
+Using the singleton class (`class << self`) to define class methods, groups them together makes the class more organised.
 
-A class method belongs to the class itself.
+```ruby
+class MyClass
+    class << self
+        def my_class_method
+            # method implementation
+        end
+    end
+end
+```
 
-==%. 有三種 methods：== 
+Using `self.` prefix, is another way, which is clear and concise, easy to read and understand.
 
-==Class methods：這是 class 給自己（工廠）用的；== 
-
-==Instance methods：這是 class 安裝進生產出來的 instance（object）上的；還有== 
-
-==Singleton methods：這是某一個 instance 或 object 在被生成後，自己搞來用的。== 
-
-==20231223 %==
-
-### What Are Class Methods For?
-
-Why create a class method rather than the more usual instance method? 
-There are two main reasons: First, a class method can ==be used as a “ready-to-run function” without having to go to the bother of creating an object just to use it==, and second, ==it can be used on those occasions when you need to run a method before an object has been created==.
+```ruby
+class MyClass
+    def self.my_class_method
+        # method implementation
+    end
+end
+```
 
 
 
+## `subclass = Class.new(self)`
+
+`Class.new` is a method in Ruby that creates a new class.
+
+* when you call `Class.new` without any arguments, it creates an anonymous class with `Object` as its superclass.
+* when you provide an argument to `Class.new`, it creates a new class with the provided argument as its superclass.
+* when you pass `self` as an argument to `Class.new`, it creates a new class that is a subclass of the current class (the one where this code is being executed).
+
+This subclass inherits all the methods and properties of the original class but is a distinct class that can be modified independently.
+
+This is a way to dynamically create a new subclass of the current class. This technique is useful in scenarios where you need to create classes dynamically based on runtime conditions or for advanced metaprogramming patterns.
 
 

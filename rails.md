@@ -1,4 +1,4 @@
-# Rails Structure
+# Rails
 
 ## Rails in one sentence
 

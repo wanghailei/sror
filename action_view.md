@@ -18,7 +18,17 @@ Jbuilder templates generate JSON responses.
 
 In an ERB template, the ``debug`` method can be used to display the contents of the session, the details of the parameters, and the current response.
 
+### Expose one instance variable per Action
 
+The way Rails makes data from controllers available to views is ==by copying the *instance variables of the controller* into the view code as *instance variables with the same name*==.
+
+The way to get the most of Rails’ design without creating a problem is to adopt two conventions:
+
+- ==Expose exactly one instance variable from any given action, ideally named for the resource or resources being manipulated by the route to that action.== For example, the `widget` `show` page should only expose `@widget`. ==The key situation to avoid is exposing multiple instance variables that collectively represent the resource rather than creating a single instance variable (and perhaps a new model class) to do so.==
+
+- There are there exceptions: when a view requires access to reference data, like a list of country codes, when the view needs access to global context, like the currently logged-in user, or when there is UI state that is persisted across page refreshes, such as the currently selected tab in a tab navigation control.
+
+	
 
 ## Helper
 
@@ -93,16 +103,16 @@ The `:model` argument of `form_with` binds the form builder object to a model ob
 
 ### form\_with and RESTful resources
 
-When dealing with RESTful resources, calls to `form_with` can get significantly easier if you rely on record identification. In short, you can just pass the model instance and have Rails figure out model name and the rest.
+When dealing with RESTful resources, calls to `form_with` can get significantly easier if you rely on record identification. In short, you can just pass ==the model instance== and have Rails figure out model name and the rest.
 
 The long and short style of editing an existing article have the same outcome:
 
 ```ruby
 # long-style:
-form_with(model: @article, url: article_path(@article), method: "patch")
+form_with( model: @article, url: article_path(@article), method: "patch" )
 
 # short-style:
-form_with(model: @article)
+form_with( model: @article )
 ```
 
 ### Parameter Naming Conventions

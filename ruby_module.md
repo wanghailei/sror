@@ -25,9 +25,9 @@ You can `include` a module within a class definition. When this happens, all the
 
 ## `Module#autoload`
 
-<mark style="background-color:orange;">`Module#autoload`</mark> <mark style="background-color:orange;"></mark><mark style="background-color:orange;">allows you to load constants on demand.</mark>
+==`Module#autoload` allows you to load constants on demand.==
 
-<mark style="background-color:orange;">`Module#autoload`</mark> <mark style="background-color:orange;"></mark><mark style="background-color:orange;">is a method in Ruby that allows you to defer the loading of a module or class until it is first used.</mark> This can be beneficial for reducing the startup time of a Ruby program.
+==`Module#autoload` is a method in Ruby that allows you to defer the loading of a module or class until it is first used.== This can be beneficial for reducing the startup time of a Ruby program.
 
 Here's how `Module#autoload` works:
 
@@ -48,12 +48,7 @@ MyModule::MySubmodule.do_something # This line will trigger the loading of 'path
 
 In this example, `MySubmodule` will only be loaded when it is first accessed via `MyModule::MySubmodule.do_something`.
 
-**Important Notes:**
-
-* **Thread Safety:** Autoloading in Ruby is not thread-safe in versions before Ruby 3.0. This means that care should be taken in multi-threaded environments. Ruby 3.0 introduced improvements to make constant autoloading thread-safe.
-* **Rails and Zeitwerk:** In the context of Rails applications, especially from Rails 6 onwards, the Zeitwerk code loader is used. Zeitwerk handles code loading in a more sophisticated way, making the explicit use of `autoload` less common in modern Rails applications.
-
-`Module#autoload` is a powerful feature for managing dependencies and resources efficiently in larger Ruby applications. However, its use requires careful consideration of the application's structure and the execution environment.
+Ruby 3.0 introduced improvements to make constant autoloading thread-safe. ==Zeitwerk handles code loading in a more sophisticated way, making the explicit use of `autoload` less common in modern Rails applications.==
 
 
 
@@ -61,9 +56,7 @@ In this example, `MySubmodule` will only be loaded when it is first accessed via
 
 In Ruby, the `extend` keyword is used to add methods from a module to a single object, typically an instance of a class or the class itself.&#x20;
 
-When  `extend` a module in a class, the module's methods are added <mark style="background-color:orange;">as class methods of the target class</mark>.&#x20;
-
-When `include` a module into a class, the module's methods are added <mark style="background-color:orange;">as instance methods of the class</mark>.
+==When `extend` a module in a class, the module's methods are added as class methods of the target class. When `include` a module into a class, the module's methods are added ==as instance methods of the class==.
 
 
 

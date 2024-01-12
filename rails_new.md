@@ -7,8 +7,7 @@ You can specify extra command-line arguments to be used every time 'rails new' r
 ==But tailoring rails new command should be as little as possible, since it can be hard to add back parts of Rails you initially skip==, and for the most part, the parts of Rails you don’t use can sit there, inert, not bothering anyone.
 
 ```bash
-rails new appname -d=postgresql -a=propshaft
-rails new appname -d=postgresql -a=propshaft -c=tailwind
+rails new appname -a=propshaft
 ```
 
 
@@ -20,8 +19,6 @@ rails new appname -d=postgresql -a=propshaft -c=tailwind
 -a, --asset-pipeline=ASSET_PIPELINE # Choose asset pipeline (sprockets, propshaft)
 -j, --javascript=JAVASCRIPT # Choose JavaScript approach [importmap, webpack, esbuild, rollup]
 -c, --css=CSS # Choose CSS processor [options: tailwind, bootstrap, bulma, postcss, sass]
--m, --template=TEMPLATE # Path to some application template (can be a filesystem path or URL)
--G, --skip-git # Skip .gitignore file
 
 --api # Preconfigure smaller stack for API only apps
 --minimal # Preconfigure a minimal rails app
@@ -36,9 +33,7 @@ rails new appname -d=postgresql -a=propshaft -c=tailwind
 ## .railsrc
 
 ```bash
---database=postgresql
 --asset-pipeline=propshaft
---javascript=importmap
 ```
 
 
@@ -62,6 +57,8 @@ $ rails db:migrate
 $ rails db:seed
 
 $ rake assets:precompile
+
+
 
 \# When you're developing your application, you want to run Tailwind in watch mode, so changes are
 

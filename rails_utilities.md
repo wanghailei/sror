@@ -20,30 +20,6 @@ The ActiveSupport::Concern gives us a simpler way to include them.
 
 
 
-****
-
-# Rails Engine
-
-==Modularising your monolith using Rails Engines.==
-
-Rails Engines can be considered miniature applications that provide functionality to their host applications. ==A Rails application is actually just a "supercharged" engine, with the `Rails::Application` class inheriting a lot of its behaviour from `Rails::Engine`.==
-
-A Rails engine is a self-contained piece of functionality that can be added to an existing Rails application, or used as the foundation for a new Rails application. Essentially, it's a miniature Rails application that can be packaged and reused across multiple projects.
-
-Rails engines provide a modular way to organise and reuse code in a Rails application. ==They allow you to encapsulate related functionality (such as authentication, payments, or notifications) in a separate namespace, with its own models, views, controllers, routes, and assets.==
-
-An engine can include all the same features as a regular Rails application, including generators, migrations, tests, and configuration options. It can also have its own dependencies, such as gems or other engines.
-
-Therefore, engines and applications can be thought of as almost the same thing.
-
-Engines are also closely related to plugins. The two share a common lib directory structure, and are both generated using the rails plugin new generator.
-
-It's important to keep in mind at all times that the application should always take precedence over its engines. An application is the object that has final say in what goes on in its environment. The engine should only be enhancing it, rather than changing it drastically.
-
-To call an engine method in a Rails application, you can simply require the engine and call its methods as you would with any other Ruby class.
-
-
-
 # Zeitwerk
 
 Rails uses a Gem called Zeitwerk for autoloading. When Rails encounters an undefined constant in the code, it uses Zeitwerk which uses file-naming conventions to find and require the needed Ruby script.
@@ -60,17 +36,19 @@ Rails offers an abstraction over WebSockets: ActionCable.
 
 
 
+****
 
-
-## bin/dev
+# bin/dev
 
 The \``bin/dev`\` script is a new feature of Rails 7 to make it easier to start up your development environment. This script allows you to start the Rails server along with other services your application might depend on.
 
 `bin/dev` will start both the Rails server and the JS build watcher (along with a CSS build watcher, if you're also using cssbundling-rails).
 
-The \``bin/dev`\` script isn't automatically created when you generate a new Rails 7 application, so you'll have to create it yourself.
+The `bin/dev` script isn't automatically created when you generate a new Rails 7 application, so you'll have to create it yourself.
 
-<mark style="color:blue;">在 rails new 時，如果我安裝了 tailwind-rails 後，就有了 bin/dev；但如果我</mark>
+==% 在 `rails new` 時，如果我安裝了 tailwind-rails 後，就有了 `bin/dev`；但如果我沒安裝，就沒有。如果運行 bin/dev，就會得到報錯：`zsh: no such file or directory: bin/dev`。這種情況下，用 `rails server` 就行了。%==
+
+`jsbundling-rails`, `cssbundling-rails`, and `tailwindcss-rails` all introduce a new `bin/dev` and `Procfile.dev` file to the app when they are installed. This is a good thing as it allows developers to run one command to execute their Rails server and frontend build tools.
 
 ### **Here's an example of how to create a simple \`bin/dev\` script:**
 
