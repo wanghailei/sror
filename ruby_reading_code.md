@@ -72,9 +72,11 @@ end
 
 The `&:even?` is shorthand for a block `{ |i| i.even? }`.
 
-`:even?` is a method that returns `true` if an integer is even and `false` otherwise. The colon `:` before `even?` indicates that it is a symbol, namely, ==the `:` before `even?` converts the name of the method into a symbol.== So, `:even?` represents the symbol form of method `even?`.
+`:even?` is a method that returns `true` if an integer is even and `false` otherwise. The colon `:` before `even?` indicates that it is a symbol, namely, ==the `:` before `even?` converts the name of the method into a symbol.== So, `:even?` represents the symbol form of method `even?`. The `even?` is an instance method of the `Integer` class.
 
-==The `&` operator is used to convert the symbol `:even?` into a Proc object==, which is then passed to the `select!` method. It will allow us to call the method named `even?` on each element of the array.
+**`&` operator**: The ampersand (`&`) is a unary operator that converts the symbol to a block. When used in front of a symbol in a method call like this, it tries to call a method with the same name as the symbol on the objects being iterated over. 
+
+==The `&` operator is used to convert the symbol `:even?` into a Proc object==, which is then treated as a block by the method it's passed to, and which is then passed to the `select!` method. In this case, it's calling `even?` on each element of the array.
 
 Since `!` is used after `select`, it modifies the original array itself.
 

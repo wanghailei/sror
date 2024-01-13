@@ -107,4 +107,3 @@ This subclass inherits all the methods and properties of the original class but 
 
 This is a way to dynamically create a new subclass of the current class. This technique is useful in scenarios where you need to create classes dynamically based on runtime conditions or for advanced metaprogramming patterns.
 
-

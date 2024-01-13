@@ -1,4 +1,4 @@
-# Session & Cookie
+# HTTP Session & Cookie
 
 <mark style="background-color:orange;">Sessions are not a part of the HTTP protocol itself. Sessions are a server-side technology</mark>, managed and implemented by server-side programming languages and frameworks.
 

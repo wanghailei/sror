@@ -360,7 +360,7 @@ Advanced Querying: PostgreSQL allows for sophisticated querying on array fields,
 
 **However, there are also potential downsides:**
 
-Database Agnosticism: One of the key principles of Rails is to be database-agnostic, and using arrays in PostgreSQL could tie your application more closely to a specific database system. % 我不認為這是一個實際問題，既然我們選擇了一種成熟的數據庫，我們在未來的多少年裡就可以一直使用它，行程自己的 best practice。 20230724 %
+Database Agnosticism: One of the key principles of Rails is to be database-agnostic, and using arrays in PostgreSQL could tie your application more closely to a specific database system. % 我不認為這是一個實際問題，既然我們選擇了一種成熟的數據庫，我們在未來的多少年裡就可以一直使用它，形成自己的 best practice。 20230724 %
 
 Normalization Principles: Using arrays can break normalisation principles, potentially leading to data redundancy and anomalies.
 

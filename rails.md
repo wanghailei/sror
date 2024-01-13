@@ -2,29 +2,29 @@
 
 ## Rails in one sentence
 
-Rails is a development framework for creating <mark style="background-color:orange;">database-backed web applications</mark> according to the MVC pattern.
+Rails is a development framework for creating ==database-backed web applications== according to the MVC pattern.
 
 ## MVC
 
-<mark style="background-color:yellow;">% The Model handles business logic, the Controller handles application logic and the View handles presentation logic.</mark> %
+==% The Model handles business logic, the Controller handles application logic and the View handles presentation logic.== %
 
-<mark style="background-color:yellow;">% Controllers 負責生成並發回 HTTP Response，這個 HTTP Response  的內容主體（body）是一個HTML（或JSON等），而這個HTML是基於把某個template填充數據來完成的——被稱為 render。這些數據的填充是由Controller action決定的。Action中命令會操控某些Model進而訪問數據庫來準備好數據。20231219 %</mark>
+==% Controllers 負責生成並發回 HTTP Response，這個 HTTP Response  的內容主體（body）是一個HTML（或JSON等），而這個HTML是基於把某個template填充數據來完成的——被稱為 render。這些數據的填充是由Controller action決定的。Action中命令會操控某些Model進而訪問數據庫來準備好數據。20231219 %==
 
 ### Model layer
 
 The _**Model layer**_ represents the domain model (such as Account, Product, Person, Post, etc.) and encapsulates the business logic specific to your application.&#x20;
 
-In Rails, <mark style="background-color:orange;">database-backed model classes</mark> are derived from `ActiveRecord::Base`. Active Record allows you to present the data from database rows as objects and embellish these data objects with business logic methods.&#x20;
+In Rails, ==database-backed model classes== are derived from `ActiveRecord::Base`. Active Record allows you to present the data from database rows as objects and embellish these data objects with business logic methods.&#x20;
 
 Although most Rails models are backed by a database, models can also be ordinary Ruby classes, or Ruby classes that implement a set of interfaces as provided by the Active Model module.
 
 ### View layer
 
-The _**View layer**_ is composed of "templates" that are responsible for providing appropriate representations of your application's resources. Templates can come in a variety of formats, but most view templates are HTML with embedded Ruby code (ERB files). Views are typically <mark style="background-color:orange;">rendered to generate a controller response</mark> . In Rails, View generation is handled by Action View.
+The _**View layer**_ is composed of "templates" that are responsible for providing appropriate representations of your application's resources. Templates can come in a variety of formats, but most view templates are HTML with embedded Ruby code (ERB files). Views are typically ==rendered to generate a controller response== . In Rails, View generation is handled by Action View.
 
 ### Controller layer
 
-<mark style="background-color:orange;">The Controller works at a higher level, processing the HTTP requests and preparing the HTTP responses.</mark>
+==The Controller works at a higher level, processing the HTTP requests and preparing the HTTP responses.==
 
 The _**Controller layer**_ is responsible for handling incoming HTTP requests and providing a suitable response. Usually, this means returning HTML. Controllers load and manipulate models, and render view templates in order to generate the appropriate HTTP response.&#x20;
 
@@ -44,15 +44,15 @@ Rails also comes with:
 
 The model represents the '**state**' of the application.
 
-The View presents the model data to the users and also enables them to modify the data. The View does not use the data from Model directly, but through the Controller, namely <mark style="background-color:orange;">the View has not direct connection with the Model.</mark>
+The View presents the model data to the users and also enables them to modify the data. The View does not use the data from Model directly, but through the Controller, namely ==the View has not direct connection with the Model.==
 
 The Controller is the bridge between the Model and the View and is responsible for application logic. It handles the user's input and interactions and updates the model and view accordingly.
 
 In the Model-View-Controller (MVC) architecture, the View does not directly communicate with the Model. Instead, the Controller serves as the intermediary: Controller receives user input and makes calls to the Model.&#x20;
 
-Model performs the business logic (like data manipulations or database interactions) and returns the results to the Controller. <mark style="background-color:orange;">Controller takes the data from the Model and decides how to present it</mark>, which is often by passing it to a View. View then uses this data to render the appropriate user interface.
+Model performs the business logic (like data manipulations or database interactions) and returns the results to the Controller. ==Controller takes the data from the Model and decides how to present it==, which is often by passing it to a View. View then uses this data to render the appropriate user interface.
 
-<mark style="background-color:orange;">The View just renders the HTML, but does not "send" HTML back to the Browser.</mark>
+==The View just renders the HTML, but does not "send" HTML back to the Browser.==
 
 The Controller then takes this rendered HTML from the View and sends it back as a response to the client (browser).
 
@@ -61,7 +61,7 @@ The Controller then takes this rendered HTML from the View and sends it back as 
 Here's a simplified version of how this flow generally works in a framework like Rails:
 
 * The browser sends an HTTP request to the application.
-* <mark style="background-color:orange;">The router within the application decides which controller should handle the request,</mark> based on the routing rules defined in the application.
+* ==The router within the application decides which controller should handle the request,== based on the routing rules defined in the application.
 * The controller receives the request and based on the request, might interact with a Model (which communicates with a database) to retrieve or manipulate data.
 * The controller then passes this data to the View.
 * The View uses this data the View might need to render the HTML.
@@ -73,7 +73,7 @@ Here's a simplified version of how this flow generally works in a framework like
 
 **WHL: Who decides whether an interaction with the database is needed, the Controller or the Model?**
 
-ChatGPT: <mark style="background-color:orange;">The Controller decides when an interaction with the database is necessary based on the business logic of the application.</mark>
+ChatGPT: ==The Controller decides when an interaction with the database is necessary based on the business logic of the application.==
 
 When a request comes into the application, the Controller is the component that first handles the request. It then determines what needs to be done to satisfy that request.
 
@@ -94,13 +94,11 @@ Rules:
   default actions.
 * User-friendly URLs should be added in addition to the canonical routes.
 
-<mark style="background-color:orange;">Using resources to define routes:</mark> <mark style="background-color:orange;"></mark><mark style="background-color:orange;">`resources :widgets`</mark><mark style="background-color:orange;">. It's the best way.</mark>
+==Using resources to define routes:== ======`resources :widgets`====. It's the best way.==
 
 `bin/rails routes -g widgets`
 
 If the app’s routes are made up entirely of calls to resources, it becomes easy to understand the app at a high level.
-
-
 
 # Page
 
@@ -140,13 +138,7 @@ Reading the source code of a framework like Ruby on Rails is indeed a great way 
 
 Remember, it's okay if you don't understand everything immediately. Rails is a complex framework, and understanding it deeply takes time and practice. Consider supplementing your reading with experimentation—modify the code, run it, and see what changes. This hands-on approach can significantly enhance your learning.
 
-
-
----
-
 ## Rails source code structure
-
-
 
 Based on the provided screenshot, you have a view of the Rails `actionpack` gem directory structure, focusing on the `action_controller` module. Here is a detailed analysis of the directory structure and the purpose of the files within the `action_controller` module:
 

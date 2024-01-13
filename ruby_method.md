@@ -1,5 +1,49 @@
 # Methods
 
+## A method is an object
+
+In Ruby, you can accurately say that ==a method is an object==. This is because Ruby is a language with a very consistent object model and everything in Ruby is an object, including methods.
+
+When you reference a method in Ruby using the `method` method or the `&` operator, what you get is ==an object of the class `Method`.== This object encapsulates the method and allows you to interact with it as an object, including the ability to call the method, inspect its parameters, and so on.
+
+For example:
+
+```ruby
+class MyClass
+	def say
+		"Hello, world!"
+	end
+end
+
+obj = MyClass.new
+method_object = obj.method :say  # Retrieves the 'say' as a Method object
+p method_object.class  # => Method
+p method_object.call # => "Hello, world!"
+```
+
+In this code, `method_object` is an instance of the `Method` class. You can then call this method using `method_object.call`, ==pass it around as an object==, and use other `Method` class functionalities. 
+
+==The `Method` class is particularly useful for metaprogramming==, where methods might be manipulated programmatically, or for scenarios where you need to store references to methods for later execution.
+
+## Defining a Method
+
+In Ruby, parentheses in method definitions are optional unless you need to clarify the precedence of parameters. You can define a method with or without them. Both of the following definitions are valid and functionally equivalent:
+
+```ruby
+def a_method(p)
+	# Method body
+end
+
+def a_method p
+	# Method body
+end
+
+```
+
+
+
+## Kinds of Methods
+
 Methods defined inside a class and intended for use by all instances of the class, are called instance methods.
 
 Methods that you define for one particular object are called singleton methods.

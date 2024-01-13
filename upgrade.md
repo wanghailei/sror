@@ -60,10 +60,6 @@ fi
 
 
 
-
-
-****
-
 ## Bundler
 
 ==Bundler is not a technology specific to Rails.== Bundler is a dependency management tool for Ruby. ==Bundler is a gem to bundle gems.== It is an exit from dependency hell.&#x20;

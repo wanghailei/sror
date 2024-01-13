@@ -61,7 +61,7 @@ It's important to keep in mind at all times that the application should always t
 
 To call an engine method in a Rails application, you can simply require the engine and call its methods as you would with any other Ruby class.
 
-### How to Implement
+### Steps
 
 - Create each function as a separate Rails engine.
 - Configure your application’s routing to direct requests to the appropriate engine based on the subdomain.
@@ -215,12 +215,6 @@ Converting an existing Rails application (like "Storefront") into an engine so t
 
 By following these steps, you can effectively convert your "Storefront" application into a Rails engine and integrate it into your company's main "Backbone" application. This process involves careful refactoring, namespacing, and testing to ensure seamless integration and functionality within the larger application ecosystem.
 
-
-
-
-
-****
-
 ## A Monolith of multiple engines vs Microservices
 
 Comparing multiple Rails engines within a monolithic application versus a microservices architecture is essential for understanding their advantages, disadvantages, and best use cases.
@@ -307,7 +301,88 @@ GitHub's decision to maintain a monolithic architecture over adopting microservi
 
 The choice between a monolithic architecture and microservices architecture is highly dependent on the specific needs, history, and context of the application and organization. For GitHub, the benefits of maintaining a cohesive, unified codebase, along with the operational simplicity and reliability of a monolith, likely outweigh the advantages that a transition to microservices would bring. This decision underscores that while microservices offer certain benefits, they are not a one-size-fits-all solution, and a well-structured monolith can be equally effective for certain applications and organizations.
 
-****
+## In a monolith of multiple engines, what does the main app do?
+
+In a monolithic application composed of multiple Rails engines, the main app serves as the central coordinating unit that ties everything together. It has several key responsibilities and roles:
+
+### 1. Application Framework and Infrastructure:
+
+- **Core Framework:** The main app provides the fundamental Rails framework upon which the engines operate. This includes ==the Rails runtime environment, configuration settings, and initializations==.
+- **Shared Resources:** It manages ==shared resources like database connections, cache stores, job queues==, and other infrastructure components that are used by the engines.
+
+### 2. Integration Point for Engines:
+
+- **Mounting Engines:** The main app is responsible for mounting each engine. This involves ==specifying where in the application's URL structure each engine's routes will be accessible==.
+- **Orchestrating Engines:** The main app often handles the high-level orchestration of how different engines interact with each other, including ==shared authentication, authorization, and cross-cutting concerns like logging and monitoring==.
+
+### 3. Common Functionalities and Shared Code:
+
+- **Shared Models and Libraries:** If there are ==common models or libraries that are used by multiple engines==, the main app is typically where these are placed.
+- **Utility Services:** It can provide ==utility services and shared business logic that are essential across engines==.
+
+### 4. Entry Point for Requests:
+
+- **Routing and Middleware:** The main app is usually the entry point for all web requests. It handles top-level routing and middleware, directing requests to the appropriate engine.
+- **Error Handling and Security:** Global error handling and security measures are often managed at the main app level.
+
+### 5. Overarching Business Logic:
+
+- **High-Level Business Processes:** For business logic that spans across multiple domains represented by different engines, the main app can act as the coordinator or integrator of these processes.
+- **Workflow Management:** It may handle workflows that require coordination of services provided by multiple engines.
+
+### 6. User Interface and Layout:
+
+- **Shared Layouts and Assets:** If there's a common look and feel across different parts of the application, the main app typically manages these shared layouts, stylesheets, and JavaScript assets.
+- **Navigation and Global Features:** Features like global navigation, footers, and other cross-cutting UI components are managed by the main app.
+
+### 7. Data Integrity and Consistency:
+
+- **Database Migrations:** The main app usually handles database migrations, especially for shared database models.
+- **Data Consistency:** It ensures data consistency and integrity across the entire application, including the data used or affected by various engines.
+
+### Responsibility Allocation:
+
+- **Core vs. Modular Functionality:** Core functionality and infrastructure should reside in the main app, while modular, domain-specific functionality should be encapsulated in individual engines.
+- **Avoid Duplication:** Ensure that there’s no duplication of functionality between the main app and the engines. Each piece should have a clear, distinct responsibility.
+
+### Conclusion
+
+The main app in a multiple-engine monolithic application serves as the foundation and orchestrator, ensuring that the application runs cohesively and efficiently. It provides shared services and infrastructure, integrates and coordinates the engines, and maintains the overarching consistency and integrity of the application. In doing so, it allows the engines to focus on their specific domain responsibilities, promoting modularity and maintainability.
+
+## Plan the Orchestration, or Grow into a Monolith from a single app?
+
+The decision between planning a structured orchestration from the beginning versus allowing it to evolve from an initial single Rails application depends on various factors, including the scope of your project, the anticipated scale, and the resources available. Both approaches have their merits and potential drawbacks:
+
+### Planning the Orchestration from the Beginning
+
+**Advantages:**
+- **Clear Architecture:** You have a clear understanding of the application's architecture from the start, which can guide development and prevent architectural drift.
+- **Scalability and Maintainability:** A well-planned architecture can be more scalable and maintainable, as each component's role and interactions are defined early.
+- **Efficient Development:** Knowing the structure upfront can lead to more efficient development, as developers have a clear roadmap and understanding of where to place new features.
+
+**Disadvantages:**
+- **Initial Complexity:** It might introduce complexity early in the project, which could slow down initial development and increase the learning curve for new team members.
+- **Potential Overengineering:** There's a risk of overengineering or building a more complex system than necessary, especially if the future scale and requirements of the application are not fully known.
+
+### Letting It Grow from a Single Rails App
+
+**Advantages:**
+- **Simplicity and Speed:** Starting with a simple application allows for quicker initial development and easier early-stage adjustments.
+- **Evolution Based on Needs:** The application can evolve naturally based on actual needs and requirements, which can be more practical and less theoretical.
+- **Reduced Initial Overhead:** Less upfront planning reduces initial overhead and allows focusing on core functionalities first.
+
+**Disadvantages:**
+- **Potential Refactoring:** As the application grows, significant refactoring might be needed to modularize and scale effectively, which can be costly and time-consuming.
+- **Architectural Challenges:** Without an initial plan, the application might face architectural challenges later, such as tightly coupled components, that are harder to untangle.
+
+### Recommendations
+
+- **Assess Project Scope and Future Scale:** If you anticipate that the application will need to scale significantly or encompass a wide range of functionalities, it might be wise to plan the orchestration from the beginning.
+- **Start with a Modular Mindset:** Even if you start with a single app, design it with modularity in mind. This can make future transitions to a more orchestrated or engine-based structure smoother.
+- **Iterative Approach:** Consider an iterative approach where you start simple but constantly evaluate and refactor the architecture as the application grows and requirements become clearer.
+- **Balance Flexibility and Planning:** Aim for a balance between being flexible to changes and having a structured plan that guides the evolution of the application.
+
+Ultimately, the best approach depends on your specific circumstances, including your team's expertise, the expected lifespan and complexity of the application, and how well you can predict future requirements. In many cases, a hybrid approach that starts with a simpler design but with a mindful eye towards future scalability and modularity can be effective.
 
 ## ~~Rails Plugin~~
 

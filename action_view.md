@@ -80,8 +80,6 @@ The `button_to` method works the same as link_to but generates a button in a sel
 
 
 
-
-
 ## form\_with
 
 `form_with()` sets up a Ruby block environment, within which, the block’s parameter `f` is used to reference a `form` context.
