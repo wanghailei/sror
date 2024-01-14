@@ -50,7 +50,7 @@ rbenv install 3.3.0
 rbenv global 3.3.0
 ```
 
-After `rbenv install` and `rbenv global`, the ~/.zshrc need to be modified for `ruby` to take effect:
+==After `rbenv install` and `rbenv global`, the ~/.zshrc need to be modified for `ruby` to take effect:==
 
 ```bash
 if command -v rbenv > /dev/null; then

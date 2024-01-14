@@ -1,5 +1,19 @@
 # Type
 
+## Ruby's Approach to Types
+
+Ruby is a dynamically typed language, meaning that it does not require or enforce type annotations in its syntax. Variables in Ruby can hold references to objects of any type, and the type of a variable can change over its lifetime. This provides a great deal of flexibility and is a hallmark of Ruby's design philosophy, focusing on simplicity and productivity.
+
+==Ruby does not have syntax for types.==
+
+```ruby
+Project.find params[:id] # Project is a constant, not a type.
+```
+
+
+
+****
+
 ### Type 形態 / 形式 / 模樣 / 形狀
 
 我認為 type 翻譯成「形態」/「型態」比較合適，甚至叫「形狀」或「模樣」都很好。因為一個 type 確實表現的是一段代碼的構成樣式、形狀、構造，如果這種樣式經常被看到，就可以抽象出來，並起一個名字，也就是稱之為「某型代碼」或「某種形態代碼」。這跟虎形、鶴形；可愛型、性感型，其實是一個道理。
@@ -44,7 +58,7 @@ A value type is a type whose value is copied when it’s assigned to a variable 
 
 Unlike value types, reference types are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used.
 
-<mark style="background-color:orange;">Classes are reference types.</mark>
+==Classes are reference types.==
 
 #### Size of a Data Type ( a data's type / a value's type :-))
 
@@ -57,21 +71,40 @@ For a n bit system, it can store a maximum of 2n values in it.\
 
 Think of bit as a value that is either 0 or 1.
 
+## Number
 
+In Ruby, numbers are objects.
 
+Keep in mind that most of the arithmetic operators you see in Ruby are methods. They don’t look that way because of the operator-like syntactic sugar that Ruby gives them.
 
+If you define, say, a method called + in a class of your own, you can use the operator’s syntactic sugar.\
+And if you see arithmetic operators behaving weirdly, it may be that someone has redefined their underlying methods.
 
-***
+### 5 is an integer and an object. How can that be? With a language background of Java or Rust, it's hard to understand.
 
-## **Ruby's Approach to Types**
+The idea that everything is an object in Ruby, including primitives like integers or booleans, can be a little challenging to understand if you're coming from a language like Java or Rust where primitives are not objects.
 
-Ruby is a dynamically typed language, meaning that it does not require or enforce type annotations in its syntax. Variables in Ruby can hold references to objects of any type, and the type of a variable can change over its lifetime. This provides a great deal of flexibility and is a hallmark of Ruby's design philosophy, focusing on simplicity and productivity.
+In languages like Java or Rust, primitives such as integers or booleans are not objects, they're basic data types with a fixed size in memory and a specific set of operations that can be performed on them. They don't have methods or properties like objects do.
 
-<mark style="background-color:orange;">Ruby does not have syntax for types.</mark>
+Ruby, however, takes a different approach. In Ruby, everything is an object. This includes integers, strings, arrays, and even classes and modules themselves. Each of these objects is an instance of a class, which means it has a set of methods it can call and it can have instance variables to hold state.
 
+In this way, Ruby simplifies its model of the world by treating everything as an object, each with its own set of behaviours and data. This allows for a consistent way of interacting with all elements in the language and makes the language more flexible and expressive.
+
+An integer in Ruby is an instance of the Integer class, which means it has methods that can be called on it, like `even?` to check if the number is even, or `times` to repeat an action a certain number of times.
+
+```ruby
+5.times do |i|
+	p "We are at number #{i}!"
+end
 ```
-Project.find( params[:id] ) // Project is a constant, not a type.
+
+## String
+
+
+
+```ruby
+# frozen_string_literal: true
 ```
 
-
+This line is a magic comment in Ruby. It tells Ruby to freeze all string literals in the file. Freezing a string makes it immutable, meaning it can't be modified.
 

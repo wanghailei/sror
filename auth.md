@@ -1,8 +1,6 @@
-# Authentication
+# Auth
 
-
-
-**WHL: Where the authorisation logic should be defined, in the Controller or the Model?**
+## Where the authorisation logic should be defined, in the Controller or the Model?
 
 **ChatGPT**: Authorisation logic can be defined in both the Controller and the Model, depending on the complexity of your application and the level of granularity you need. However, ==it's a common practice to handle most of the authorisation logic at the Controller level.==
 
@@ -16,11 +14,11 @@ In any case, it's crucial that you carefully consider where to put authorization
 
 Moreover, many web frameworks provide libraries or modules to handle authorization. For example, in Rails, you might use a gem like Pundit or CanCanCan, which provide a structured way to handle authorization and can help ensure that you don't miss any important checks.
 
-
+## Authentication
 
 ### Authentication with Devise
 
-Devise is a flexible authentication solution for Rails based on Warden. It is Rack based, complete MVC solution based on Rails engines and allows you to have multiple models signed in at the same time;
+Devise is a flexible authentication solution for Rails based on Warden. It is Rack based, complete MVC solution based on **Rails engines** and allows you to have multiple models signed in at the same time.
 
 It's based on a modularity concept: use only what you really need. The following are its 10 modules:
 
