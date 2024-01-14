@@ -1,10 +1,6 @@
 # Block, Proc, Lambda
 
-
-
 ## Block
-
-
 
 If you have used `each` before, then you have used blocks!
 
@@ -20,9 +16,7 @@ The block may start with an argument list between vertical bars.
 
 A block is useful because it allows you to save a bit of logic (code) & use it later.
 
-
-
-## Is a block of the "type" Proc?
+### Is a block of the "type" Proc?
 
 In Ruby, a block is conceptually related to a `Proc` object, although they are not exactly the same. 
 
@@ -230,31 +224,31 @@ Here, `some_method` is called with `my_proc` being converted to a block.
 
 ### 2. Converting Method Objects to Blocks
 
-- **Referencing a Method**: You can reference a method on an object using the `method` method, which returns a `Method` object. You can then convert this `Method` object to a block by using the `&` operator. This is useful for passing a method as a block to another method.
+**Referencing a Method**: You can reference a method on an object using the `method` method, which returns a `Method` object. You can then convert this `Method` object to a block by using the `&` operator. This is useful for passing a method as a block to another method.
 
-  ```ruby
-  class MyClass
-    def my_method
-      puts "Method called"
-    end
-  end
-  
-  obj = MyClass.new
-  method_obj = obj.method(:my_method)
-  [1, 2, 3].each(&method_obj)
-  ```
+```ruby
+class MyClass
+	def my_method
+		puts "Method called"
+	end
+end
 
-  In this example, `method_obj` (a `Method` object) is converted to a block and passed to `each`.
+obj = MyClass.new
+method_obj = obj.method(:my_method)
+[1, 2, 3].each(&method_obj)
+```
+
+In this example, `method_obj` (a `Method` object) is converted to a block and passed to `each`.
 
 ### 3. Symbol to Proc Conversion
 
-- **Shorthand for Calling Methods**: The `&` operator is also used in a popular Ruby idiom that converts symbols to blocks, known as the "Symbol to Proc" conversion. This is often used with methods like `map`, `select`, or `each`.
+**Shorthand for Calling Methods**: The `&` operator is also used in a popular Ruby idiom that converts symbols to blocks, known as the "Symbol to Proc" conversion. This is often used with methods like `map`, `select`, or `each`.
 
-  ```ruby
-  [1, 2, 3].map(&:to_s)
-  ```
+```ruby
+[1, 2, 3].map &:to_s
+```
 
-  In this case, `&:to_s` converts the `:to_s` symbol to a `Proc` that calls the `to_s` method on every object in the array.
+In this case, `&:to_s` converts the `:to_s` symbol to a `Proc` that calls the `to_s` method on every object in the array.
 
 ### Summary
 
