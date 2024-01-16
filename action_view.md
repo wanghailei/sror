@@ -4,7 +4,7 @@ Action View encapsulates all the functionality needed to render templates, most 
 
 ## Templates
 
-The ``render`` method expects to find templates in the app/views directory of the current application.
+The `render` method expects to find templates in the app/views directory of the current application.
 
 Within this directory, the convention is to have a separate subdirectory for the views of each controller. Each subdirectory typically contains templates named after the actions in the corresponding controller.
 

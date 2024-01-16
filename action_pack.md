@@ -33,19 +33,15 @@ By default, only the `ApplicationController` in a Rails application inherits fro
 
 The `ApplicationController` source code is in a Rails application project folder. ==% 在 Rails 的source code 文件夾裡面找不到一個 ApplicationController 文件，因為它是被 rails new 生成出一個 app 代碼結構後才產生的。20231219 %==
 
+## Action
 
-
-****
-
-# Action
-
-==An action is defined as a public method on the controller==, which will automatically be made accessible to the web-server through Rails Routes.
+==An action is defined as **a public method** on the controller==, which will automatically be made accessible to the web-server through Rails Routes.
 
 Actions, by default, render a template in the app/views directory corresponding to the name of the controller and action after executing code in the action. For example, the `index` action of the `PostsController` would render the template app/views/posts/index.html.erb by default after populating the `@posts` instance variable.
 
 Unlike `index`, the `create` action will not render a template. After performing its main purpose (creating a new post), it initiates a `redirect` instead. This `redirect` works by returning an external 302 Moved HTTP response that takes the user to the `index` action. These two methods represent the two basic action archetypes used in Action Controllers: Get-and-show and do-and-redirect. Most actions are variations on these themes.
 
-## `respond_to do | format | ... end`
+### `respond_to do | format | ... end`
 
 Rails apps can generate responses in different formats. `respond_to` supports specifying a common block for different formats of the template to be rendered.
 
@@ -160,3 +156,23 @@ Disadvantages:
 
 - It requires you to explicitly pass all locals to partials, which can be a bit more verbose especially when there are many locals to pass.
 - It could cause your application to crash during development if a developer accidentally refers to an unassigned instance variable.
+
+
+
+## Routes
+
+Routes' primary purpose is to connect view to controller, and they also serve as a UI element--URL.
+
+Rules:
+
+* Always use canonical routes that conform to Rails’ defaults.
+* Avoid custom actions in favor of creating new resources that use Rails’\
+	default actions.
+* User-friendly URLs should be added in addition to the canonical routes.
+
+==Using resources to define routes:== ======`resources :widgets`====. It's the best way.==
+
+`bin/rails routes -g widgets`
+
+If the app’s routes are made up entirely of calls to resources, it becomes easy to understand the app at a high level.
+

@@ -66,8 +66,6 @@ Notice the `&work` paramete. That’s how you define the block’s name!
 
 When you use the `yield` keyword, the code inside the block will run to do its job, just like when you call a regular method.
 
-
-
 ## Lambda
 
 A lambda is a way to define a block and its parameters with some special syntax. You can save this lambda into a variable for later use.
@@ -76,7 +74,8 @@ A **Lambda** is created with `lambda {}` or `-> {}`.
 
 ```ruby
 say_something = -> { puts "This is a lambda." }
-talk_anything = lambda { puts "This is also a lambda." }
+# Or construct a proc with lambda semantics using the Kernel#lambda method.
+talk_anything = lambda { puts "This is also a lambda." } 
 ```
 
 Defining a lambda won’t run the code inside it, just like defining a method won’t run the method, you need to use the `call` method for that.
@@ -90,13 +89,11 @@ In general programming concepts, a lambda is ==a type of anonymous function==. T
 3. **Immediate Execution**: ==Unlike regular functions, lambdas can be executed immediately at the place where they are defined.==
 4. **Closure**: ==Lambdas often form closures==, meaning they can capture and use variables from their enclosing scope. This makes them powerful for various programming patterns, such as callbacks, event handlers, and short-lived operations that require some local state.
 
-
-
 ## Proc
 
 A **Proc** is created with `proc {}` or `Proc.new {}`.
 
-
+[Proc](https://ruby-doc.org/core-3.0.1/Proc.html) objects are *closures*, meaning they remember and can use the entire context in which they were created.
 
 ### The difference between a Proc and a Lambda
 
