@@ -2,7 +2,7 @@
 
 
 
-==Assets Pipeline 讓網頁的各種素材加載更快，並確保加在最新的素材，且適應不同瀏覽器。這可以被看作是一個自動化輔助工具，跟開發其實沒什麼關係，提前設置好了就行。20231129==
+==% Assets Pipeline 讓網頁的各種素材加載更快，並確保加在最新的素材，且適應不同瀏覽器。這可以被看作是一個自動化輔助工具，跟開發其實沒什麼關係，提前設置好了就行。20231129 %==
 
 ## What does an asset pipeline do?
 
@@ -77,19 +77,15 @@ Solution:
 
 `rails assets:clean assets:precompile`
 
-<mark style="background-color:red;">% Remember to restart the Rails server to see effect. 20230613 %</mark>
-
-
-
-***
+==% Remember to restart the Rails server to see effect. 20230613 %
 
 ## Import Maps
 
-Import Maps manage your application's JavaScript dependencies. <mark style="background-color:orange;">Import Maps make using most npm packages without the need for transpiling or bundling,</mark> by importing JavaScript modules using logical names that map to versioned/digested files – directly from the browser.
+Import Maps manage your application's JavaScript dependencies. ==Import Maps make using most npm packages without the need for transpiling or bundling,== by importing JavaScript modules using logical names that map to versioned/digested files – directly from the browser.
 
-<mark style="background-color:orange;">When using Import Maps, no separate build process is required</mark>, just start your server with `bin/rails server` and you are good to go.
+==When using Import Maps, no separate build process is required==, just start your server with `bin/rails server` and you are good to go.
 
-<mark style="background-color:orange;">Import maps are a browser feature that allows you to control the behaviour of JavaScript imports</mark>. They provide a way to map import specifiers (like module names) to actual URLs, enabling you to:
+==Import maps are a browser feature that allows you to control the behaviour of JavaScript imports==. They provide a way to map import specifiers (like module names) to actual URLs, enabling you to:
 
 **Simplify Module Paths**: You can shorten or simplify paths to JavaScript modules. Instead of using long or complex URLs in your import statements, you can define a short, easy-to-remember name.
 

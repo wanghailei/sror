@@ -10,8 +10,6 @@ You can specify extra command-line arguments to be used every time 'rails new' r
 rails new appname -a=propshaft
 ```
 
-
-
 ## ```rails new``` Options:
 
 ```bash
@@ -38,19 +36,15 @@ rails new appname -a=propshaft
 
 
 
-****
-
 ## Rails
 
 $ sudo gem install rails
 
 $ rails new my-app --css tailwind -a propshaft
 
-\# Propshaft is an asset pipeline library for Rails.
+Propshaft is an asset pipeline library for Rails. It's built for an era where bundling assets to save on HTTP connections is no longer urgent.
 
-\# It's built for an era where bundling assets to save on HTTP connections is no longer urgent.
-
-\# How to run a Rails deposit on a new Mac.
+### How to run a Rails deposit on a new Mac.
 
 $ rails db:migrate
 
