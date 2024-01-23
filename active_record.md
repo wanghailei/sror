@@ -7,8 +7,6 @@ Smart models by design
 * Define instance methods for things an instance of a class should "know"
 * Models can leverage attributes and associations
 
-
-
 Model performs two key roles: one for representing the state of the application or business, two it communicates with the database.
 
 State Representation: It represents the data and the rules (business logic) that govern access to and updates of this data. In other words, it maintains the state of the application.
@@ -16,8 +14,6 @@ State Representation: It represents the data and the rules (business logic) that
 Database Communication: The Model is responsible for all interactions with the database, namely CRUD. The Model uses an Object-Relational Mapping (ORM) system to abstract the low-level database commands into higher-level programming language methods or functions.
 
 ==The purpose of separating these responsibilities into a Model component is to isolate the business logic and data manipulation logic of an application.== Changes in the graphical user interface (handled by the View) or changes in the way user inputs are processed (handled by the Controller) do not affect the business rules or the database communication logic, and vice versa.
-
-
 
 ## Active Record
 
@@ -43,7 +39,26 @@ Active Record gives us several mechanisms, the most important being the ability 
 
 ActiveRecord is an Object-Relational Mapper so that each of your objects represents a database row. ActiveModel is the interface that Rails uses to all of storage including non-relational stores like Cassandra or MongoDB, to fit particular object types into Rails.
 
-## Relationships
+## Associations
+
+In Rails, an *association* is a connection between two Active Record models. Why do we need associations between models? Because they make common operations simpler and easier in your code.
+
+Rails supports six types of associations, each with a particular use-case in mind.
+
+- `belongs_to`
+- `has_one`
+- `has_many`
+- `has_many :through`
+- `has_one :through`
+- `has_and_belongs_to_many`
+
+
+
+### `belongs_to`
+
+A `belongs_to` association sets up a connection with another model, such that each instance of the declaring model "belongs to" one instance of the other model. 
+
+The `belongs_to` associations *must* use the singular term. If you used the pluralized form in the above example for the `author` association in the `Book` model and tried to create the instance by `Book.create(authors: @author)`, you would be told that there was an "uninitialized constant Book::Authors". This is because Rails automatically infers the class name from the association name. If the association name is wrongly pluralized, then the inferred class will be wrongly pluralized too.
 
 In general, ==the `belongs_to` association should be defined on the table that holds the foreign key, while the `has_one` association should be defined on the table that holds the primary key==. This is because the foreign key is a reference to the primary key in the other table, and the `belongs_to` association is used to define this relationship.
 
@@ -61,7 +76,7 @@ end
 
 There are 4 kinds of relationships: `belongs_to`, `has_one`, `has_many`, `has_many :through`.
 
-### `belongs_to`
+###
 
 In Rails, belongs_to is used to set up associations on the model that contains the foreign key column. belongs_to is not just for one-to-one relationships. 
 
@@ -95,7 +110,23 @@ In this example, an Author can have many Books, and each Book belongs to an Auth
 
 So, belongs_to can be used to set up both one-to-one and one-to-many relationships, depending on whether the associated model uses has_one or has_many.
 
-### An example with Employee, Position, Department and Appointment as models.
+### `has_many`
+
+
+
+```ruby
+class Author < ApplicationRecord
+  has_many :books, dependent: :destroy
+end
+
+class Book < ApplicationRecord
+  belongs_to :author
+end
+```
+
+### Relationships need be defined in Models
+
+An example with Employee, Position, Department and Appointment as models.
 
 % Appointment is a join table for Employee and Position and it actually could be named as EmployeePosition. 我認為應該創建這種 ==meaningful join-tabel==，而不是硬生生把兩個 object 連起來。 20240119 %
 
@@ -143,7 +174,7 @@ class Appointment < ApplicationRecord
 end
 ```
 
-#### The relationships also need to be defined in migration files.
+### Relationships also need be defined in Migration
 
 Besides defining the relationship in ActiveRecord, you also need to define the relationships in migration files when setting up your database schema in Rails. 
 
@@ -178,7 +209,79 @@ class CreateAppointments < ActiveRecord::Migration[7.1]
 end
 ```
 
-### Another example about complicated relationships
+### Add references (foreign key relationships) Later
+
+% 經常需要後續添加 reference（foreign key relationships）。單獨創建 migration 來做這件事。 20240120 %
+
+```ruby
+class EmployeesReferencesPositionAppointmentDepartmentAddition < ActiveRecord::Migration[7.1]
+	def change
+		add_reference :employees, :position, null: false, foreign_key: true
+		add_reference :employees, :appointment, null: false, foreign_key: true
+		add_reference :employees, :department, null: false, foreign_key: true
+	end
+end
+```
+
+Foreign keys additionally add an index to that column for DB performance. 
+
+#### `foreign_key: true`
+
+A Foreign Key, on the other hand, is a column or a set of columns in a table that is used to establish a link between the data in two tables. ==It's a field in one table, that uniquely identifies a row of another table. The foreign key in one table is the primary key of another table.==
+
+For example, consider a posts table in a blog database. Each post might be associated with a user. The posts table might have a `user_id` column as a foreign key. This `user_id` is used to associate each post with a user. The `user_id` in `posts` table refers to the id `in` the `users` table.
+
+The main purpose of foreign keys is to enforce a certain level of data integrity in the database. If a foreign key constraint is set up, it prevents actions that would destroy links between tables. For example, ==a database wouldn't allow a row containing a foreign key to be deleted if there is a row in the linked table that references it.==
+
+==In Rails Migration, when `foreign_key: true` is specified, it means that you're adding a foreign key constraint at the database level.==
+
+```ruby
+def change
+	add_reference :articles, :author, foreign_key: true
+end
+```
+
+In this migration, you're adding a new column `author_id` to the `articles` table. The `author_id` will be used to link each article to a specific author. `foreign_key: true` adds a foreign key constraint to this `author_id` column.
+
+The foreign key constraint ensures referential integrity, which means the database will only allow you to enter an author_id in the articles table if it refers to an existing author record in the authors table.
+If you try to enter an author_id that doesn't exist in the authors table, or if you try to delete an author record that's associated with an article record, the database will raise an error. In this way, foreign_key: true helps to preserve the integrity of your data.
+In Rails 5 and onward, foreign_key: true by default also implies an index on this column, which helps speed up queries involving this foreign key. Note that it's not enough just to have the foreign key column in your model - you should add the foreign key at the database level with a migration to ensure referential integrity.
+
+#### Potential issues that might occur:
+
+**Nonexistent Tables**: If `employees`, `position`, `appointment`, or `department` tables do not exist, then this migration will fail during runtime. % 所以，==在運行添加 reference 的 migration 時，首先要確保相關的表都已經創建了。== 20240120 %
+
+**Existing Columns**: If `employees` already has `position_id`, `appointment_id` or `department_id` column, the migration will fail. % 是不是在創建 migration（尤其用 rails g migration）時，分兩步走比較好？首先創建獨立的基本表，然後另起一個 migration 創建 reference。 20240120 %
+
+**Nonexistent Values**: If `null: false` was set, ensure that you have the necessary data for all existing records. If not, existing records without these foreign key values would not be valid.
+
+**Locking**: A very large number of indexes may negatively impact write performance. If you have a significant number of records, adding an index can lock your table for a time proportional to the number of records. 
+
+### Setting null: false
+
+By default, Rails sets `null: true` if you do not specify the `null` option. ==Setting `null: false` implies that these fields must always have a value==. 
+
+If you define a column with `null: true` or without specifying null: false in a migration in Rails, it means that the column is allowed to have NULL values. Therefore, in this case, the `position_id`, `appointment_id`, and `department_id` columns in the `employees` table could have `NULL` values. In other words, it would be legal for an `employee` record to not have associated `position`, `appointment`, or `department`.
+
+#### Is setting null: true a good thing?
+
+Whether to set null: true or null: false largely depends on the business requirements and the domain model of your application.
+
+Setting null: false enforces that the column must always contain a value, i.e., it cannot be null. This is typically used when you know that a column should always have a value for every record in the table.
+On the other hand, null: true is the default setting which allows NULL values in the column. This means that it's not mandatory for every record to have a value for this column.
+
+Here are a few things to consider when choosing between null: true and null: false:
+Data Integrity and Consistency: Setting null: false promotes data integrity and consistency since it enforces every record to provide a value for the column.
+
+Business Rules: If, according to the business rules, a field must always contain data, then setting null: false is the right choice. For instance, an employees table should probably have a name field that is always filled, thus null: false would be appropriate.
+
+Flexibility: Setting null: true can provide flexibility. There might be circumstances where you do not have all the data at the time of creating a record. In such cases, allowing NULL values in certain columns could be beneficial.
+
+Performance: Allowing NULL values (null: true) can slightly increase the performance of the database when querying data because SQL databases can optimize NULL storage and searches.
+
+Weigh these considerations in terms of your specific requirements. For instance, if your employees can exist without associated position, appointment, or department, then setting null: true for position_id, appointment_id, and department_id would seem appropriate. However, if these associations are mandatory according to your business rules, then you should enforce null: false to ensure data integrity.
+
+### Example 2
 
 For three models, Position, Responsibilty and Capability. A Position shall have mulitiple responsibilities and capabilities. A responsibility might be shared by many positions, such as all directors should be able to lead team members well. A common capability might be required by different positions, such as critical thinking. How to define the relationships in ActiveRecord?
 
@@ -245,6 +348,8 @@ end
 ```
 
 These models and migrations will establish the relationships, where a position can have multiple responsibilities and capabilities, and a responsibility or capability can be associated with multiple positions.
+
+
 
 ## Other things
 
