@@ -37,15 +37,11 @@ $ brew upgrade ruby@3.3.0 // or to a specific version.
 After brew install ruby, the .zshrc needs to be modified. 根據我的經驗教訓，.zshrc應該是這樣的：
 
 ```bash
-#export PATH=/opt/homebrew/bin:$PATH 
-#if [ -d "/opt/homebrew/opt/ruby/bin" ]; then 
-#       export PATH=/opt/homebrew/opt/ruby/bin:$PATH 
-#       export PATH=`gem environment gemdir`/bin:$PATH 
-#fi 
 export PATH="/opt/homebrew/bin:$PATH" 
 export PATH="/opt/homebrew/sbin:$PATH" 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH" 
 export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH" 
+export PATH=`gem environment gemdir`/bin:$PATH 
 export LDFLAGS="-L/opt/homebrew/opt/ruby/lib" 
 export CPPFLAGS="-I/opt/homebrew/opt/ruby/include" 
 export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig" 
