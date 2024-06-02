@@ -225,6 +225,16 @@ end
 
 Foreign keys additionally add an index to that column for DB performance. 
 
+#### While it's not required, you might want to add foreign key constraints to guarantee referential integrity.
+
+==In Rails, foreign key constraints are not strictly required because Rails provides its own mechanisms to maintain referential integrity at the application level.== 
+
+==ActiveRecord Associations allow Rails to infer the foreign key relationships from the model definitions, without having to explicitly enforce them at the database level.==
+
+Not all databases support foreign key constraints, therefore Rails doesn't require them as part of its standards.
+
+However, adding foreign key constraints at the database level provides an added level of data protection and can prevent race conditions or inadvertent errors from corrupting data relationships, such as running SQL commands directly on the database outside of Rails or concurrent writes to the database.
+
 #### `foreign_key: true`
 
 A Foreign Key, on the other hand, is a column or a set of columns in a table that is used to establish a link between the data in two tables. ==It's a field in one table, that uniquely identifies a row of another table. The foreign key in one table is the primary key of another table.==

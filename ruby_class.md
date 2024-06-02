@@ -43,20 +43,15 @@ In Ruby, top-level constants (those defined outside of any class or module) are 
 
 `Module#autoload` allows you to load constants on demand.
 
-
-
-***
-
 ## Singleton Class
 
-In Ruby, ==each object has its own singleton class== (also known as a metaclass or eigenclass). \
-==The singleton class is a subclass of the object's class.== This singleton class is automatically created by Ruby the first time you define a singleton method on the object.&#x20;
+In Ruby, ==each object has its own singleton class== (also known as a metaclass or eigenclass). ==The singleton class is a subclass of the object's class.== This singleton class is automatically created by Ruby the first time you define a singleton method on the object.&#x20;
 
 The singleton class is a core aspect of Ruby's object-oriented design, which emphasizes flexibility and expressiveness. Here are some key reasons why singleton classes are used:
 
 1. **Implementing Class Methods**: ==In Ruby, class methods are actually instance methods of the class's singleton class.== This is because classes themselves are also objects in Ruby, so each class has its own singleton class where its class methods are stored.
-2. **Individual Object Customisation**:  ==Singleton classes allow you to add methods to an individual object rather than to an entire class of objects.== Without singleton class, the only way would be to modify its class. However, modifying a class affects all instances of that class, which can lead to unexpected side effects. \
-   Especially, when you want to add functionality to instances of core classes (like String, Array, etc.) without affecting all instances, singleton classes are the way to go. This is often used in Ruby on Rails and other frameworks to extend the capabilities of standard objects on a per-instance basis.\
+2. **Individual Object Customisation**:  ==Singleton classes allow you to add methods to an individual object rather than to an entire class of objects.== Without singleton class, the only way would be to modify its class. However, modifying a class affects all instances of that class, which can lead to unexpected side effects. 
+   Especially, when you want to add functionality to instances of core classes (like String, Array, etc.) without affecting all instances, singleton classes are the way to go. This is often used in Ruby on Rails and other frameworks to extend the capabilities of standard objects on a per-instance basis.
    &#x20;==% Why don't use mixin? 20231223 %==
 3. **Supporting Metaprogramming**: Ruby's metaprogramming capabilities are largely facilitated by singleton classes. They allow dynamic addition of methods at runtime, making Ruby a very flexible and powerful language for metaprogramming.
 4. **Method Look-Up Consistency**: Ruby maintains a consistent method look-up path. ==When you call a method on an object, Ruby first looks in the object's singleton class before looking in the object's actual class and its ancestors.==&#x20;
@@ -65,9 +60,7 @@ The singleton class is a core aspect of Ruby's object-oriented design, which emp
 
 
 
-***
-
-## **`class << self`**
+## `class << self`
 
 This syntax is used to define class methods within the block. It opens up the singleton class of the current class, allowing you to define methods that will be available on the class itself, rather than on instances of the class.
 
@@ -82,6 +75,25 @@ class MyClass
     end
 end
 ```
+
+A real-world code example from Rails:
+
+```ruby
+module ActiveRecord
+    class CurrentAttributes
+        class << self
+            def instance
+                current_instances[ current_instances_key ] ||= new
+            end
+            def attribute( *name )
+            end
+        end
+    end
+end
+
+```
+
+
 
 Using `self.` prefix, is another way, which is clear and concise, easy to read and understand.
 

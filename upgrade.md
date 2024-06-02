@@ -40,7 +40,7 @@ After brew install ruby, the .zshrc needs to be modified. 根據我的經驗教�
 export PATH="/opt/homebrew/bin:$PATH" 
 export PATH="/opt/homebrew/sbin:$PATH" 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH" 
-export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH" 
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.2/bin:$PATH" 
 export PATH=`gem environment gemdir`/bin:$PATH 
 export LDFLAGS="-L/opt/homebrew/opt/ruby/lib" 
 export CPPFLAGS="-I/opt/homebrew/opt/ruby/include" 
@@ -174,11 +174,23 @@ RubyGems keeps old versions of gems, so feel free to do some cleaning after upda
 $ gem cleanup
 ```
 
+### RubyGems Versioning and Directories
 
+- **Ruby Version**: 3.3.2 indicates the specific version of Ruby you have installed.
+- **Installation Directory**: `/opt/homebrew/lib/ruby/gems/3.3.0` is used for all 3.3.x versions, not just 3.3.2.
+
+The discrepancy you're seeing between the Ruby version (3.3.2) and the installation directory (3.3.0) is a result of how RubyGems manages its versioning and directories. This setup is standard for RubyGems and helps in managing gems more efficiently across minor version updates.
+
+1. **Minor Version Directories**:
+   - RubyGems uses the minor version number for its directories. This means that even if your Ruby version is 3.3.2, the directory for gems is based on the minor version `3.3.0`. ==This approach helps in maintaining compatibility and reducing the need for multiple directories for patch-level changes.==
+
+2. **Installation Directory**:
+   - The installation directory `/opt/homebrew/lib/ruby/gems/3.3.0` is used for any Ruby 3.3.x installation. This includes all patch versions such as 3.3.1, 3.3.2, etc. It prevents redundancy and ensures that gems installed for one patch version can be used by another patch version within the same minor version.
+
+3. **Consistency Across Patch Levels**:
+   - By using the minor version directory (3.3.0) for all 3.3.x versions, RubyGems ensures that gems do not need to be reinstalled for each patch update. This approach is efficient and saves disk space.
 
 ## Upgrade a Rails app
-
-
 
 ### Verify the Rails version of an app
 
