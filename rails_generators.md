@@ -59,13 +59,13 @@ This will generate 1) a `Post` model with a `title` attribute of type string and
 
 ### Compare `rails g scaffold` and `rails g resource`
 
-rails generate scaffold generates:
+`rails generate scaffold` generates:
 A full set of model, database migration for that model, controller and views.
 A full test suite for that model.
 Helper and Javascript files related to that model
 ==It also updates the Routes file with RESTful routes for the model.==
 
-rails generate resource is a bit less inclusive. This generates:
+`rails generate resource` is a bit less inclusive. This generates:
 The model, the corresponding migration and controller files
 Test suite for that model
 Resourceful declaration in the Routes file

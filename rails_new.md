@@ -28,6 +28,12 @@ rails new appname -a=propshaft
 
 
 
+## Generate a new Rails app with --edge
+
+`--dev` uses your locally checked-out Rails repository to create the app. 
+
+`--edge` will use the latest stable version from the Github repository, instead of from your locally installed Rails gem.
+
 ## .railsrc
 
 ```bash

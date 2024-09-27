@@ -23,6 +23,7 @@
 
 ```bash
 $ brew update
+$ brew upgrade
 ```
 
 Upgrade Ruby to the latest version available in Homebrew.
@@ -31,6 +32,8 @@ Upgrade Ruby to the latest version available in Homebrew.
 $ brew upgrade ruby
 $ brew upgrade ruby@3.3.0 // or to a specific version.
 ```
+
+
 
 ## Install a new Ruby with brew
 
@@ -70,7 +73,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 
 
-% 我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不啟用`rbenv`。等到 brew 的最新版 Ruby 發布了，再重新安裝並切換回 brew 的版本。 %
+% 我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不起用`rbenv`。等到 brew 的最新版 Ruby 發布了，再重新安裝並切換回 brew 的版本。 %
 
 ### Update Ruby with `rbenv`
 
@@ -129,6 +132,8 @@ The RubyGems software allows you to easily download, install, and use ruby softw
 ```bash
 $ gem update --system
 ````
+
+`gem update --system` upgrades RubyGems itself whereas `gem update` upgrades all gems including both user-installed ones and default ones but not rubygems. The `--system` flag cuts off execution of the regular `update` command.
 
 #### Upgrade all installed gems to the latest version on macOS
 
