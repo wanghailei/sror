@@ -103,11 +103,27 @@ fi
 
 ## Bundler
 
+Bundler: a gem to bundle gems. 
+
+It does this by managing the gems that the application depends on. Given a list of gems, it can automatically download and install those gems, as well as any other gems needed by the gems that are listed. Before installing gems, it checks the versions of every gem to make sure that they are compatible, and can all be loaded at the same time. After the gems have been installed, Bundler can help you update some or all of them when new versions become available. Finally, it records the exact versions that have been installed, so that others can install the exact same gems.
+
+Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+
 Bundler is not a technology specific to Rails. ==Bundler is a dependency management tool for Ruby.== ==Bundler is a gem to bundle gems.== It is an exit from dependency hell.&#x20;
 
 Bundler makes sure a Ruby app run the same code on every development, staging, and production machine. ==It records the exact versions that have been installed, so that others can install the exact same gems.== ==% 應該說，Bundler 是團隊開發協作用的。20230619 %==
 
-==The Bundler update steps should be performed within the Rails app's directory, not in the home (`~`) directory.== This is important because Bundler needs to access the `Gemfile` and `Gemfile.lock` specific to your Rails application.
+Bundler 是工具名，而 bundle 是實際使用的命令；就像 Homebrew 是工具名，对应的命令是 brew；RubyGems是工具名，gem 是實際使用的命令。
+
+### How to install gems in your project?
+
+要在自己的程序里使用一顆 gem（Ruby語言的程序包），總共兩步：
+第一步，往項目的 Gemfile 里添加 gem "some-library"。
+第二步：執行 bundle install 命令來安裝。
+
+`bundle install` installs the dependencies specified in your Gemfile.
+
+==The Bundler update steps should be performed within the Rails app's directory, not in the home (`~`) directory.== This is important because Bundler needs to access the `Gemfile` and `Gemfile.lock` specific to your Rails application. 
 
 ### How Bundler works
 
@@ -194,6 +210,12 @@ The discrepancy you're seeing between the Ruby version (3.3.2) and the installat
 
 3. **Consistency Across Patch Levels**:
    - By using the minor version directory (3.3.0) for all 3.3.x versions, RubyGems ensures that gems do not need to be reinstalled for each patch update. This approach is efficient and saves disk space.
+
+## 工具间的关系
+
+Bundler 並不是獨立的用來取代 RubyGems 的新系統，而應被看作是對 RubyGems 的延伸。———— Bundler 讓庫兼容性問題在安裝時就暴露出來；並在每個項目內鎖定所有依賴庫的版本，免受系統上其他地方安裝 gem 的影響。
+
+同樣的道理，RubyGems 也無法取代程序中的 require 函數，只是讓它的使用更方便和準確。
 
 ## Upgrade a Rails app
 

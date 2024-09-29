@@ -34,6 +34,13 @@ rails new appname -a=propshaft
 
 `--edge` will use the latest stable version from the Github repository, instead of from your locally installed Rails gem.
 
+`--main` generate a new Rails app that runs on Rails main branch from GitHub. 
+`rails new appname --main` will generate a `Gemfile` that has something like this inside:
+
+```
+gem "rails", github: "rails/rails", branch: "main"
+```
+
 ## .railsrc
 
 ```bash
@@ -81,3 +88,19 @@ $ rails tailwindcss:build
 \# Error：The asset "tailwind.css" is not present in the asset pipeline.
 
 $ rake assets:precompile
+
+
+
+### Bundler Errors when rails new appname
+
+```bash
+Bundler::DirectoryRemovalError: Could not delete previous installation of 
+`/opt/homebrew/lib/ruby/gems/3.3.0/gems/websocket-driver-0.7.6`.
+An error occurred while installing websocket-driver (0.7.6), and Bundler cannot continue.
+```
+
+我的經驗是，用這個來嘗試解決：
+
+`gem pristine websocket-driver --version 0.7.6`
+
+如果提示沒有寫權限，則加 sudo。
