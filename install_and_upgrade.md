@@ -1,4 +1,4 @@
-# Upgrade
+# Install and Upgrade
 
 
 
@@ -43,7 +43,7 @@ After brew install ruby, the .zshrc needs to be modified. 根據我的經驗教�
 export PATH="/opt/homebrew/bin:$PATH" 
 export PATH="/opt/homebrew/sbin:$PATH" 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH" 
-export PATH="/opt/homebrew/lib/ruby/gems/3.3.2/bin:$PATH" 
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH" 
 export PATH=`gem environment gemdir`/bin:$PATH 
 export LDFLAGS="-L/opt/homebrew/opt/ruby/lib" 
 export CPPFLAGS="-I/opt/homebrew/opt/ruby/include" 
@@ -73,7 +73,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 
 
-% 我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不起用`rbenv`。等到 brew 的最新版 Ruby 發布了，再重新安裝並切換回 brew 的版本。 %
+我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不起用`rbenv`。等到 brew 的最新版 Ruby 發布了，再重新安裝並切換回 brew 的版本。
 
 ### Update Ruby with `rbenv`
 
@@ -105,15 +105,13 @@ fi
 
 Bundler: a gem to bundle gems. 
 
-It does this by managing the gems that the application depends on. Given a list of gems, it can automatically download and install those gems, as well as any other gems needed by the gems that are listed. Before installing gems, it checks the versions of every gem to make sure that they are compatible, and can all be loaded at the same time. After the gems have been installed, Bundler can help you update some or all of them when new versions become available. Finally, it records the exact versions that have been installed, so that others can install the exact same gems.
+It manages the gems that the application depends on. Given a list of gems, it can automatically download and install those gems, as well as any other gems needed by the gems that are listed. 
 
-Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+Before installing gems, it checks the versions of every gem ==to make sure that they are compatible, and can all be loaded at the same time==. After the gems have been installed, Bundler can help you update some or all of them when new versions become available. 
 
-Bundler is not a technology specific to Rails. ==Bundler is a dependency management tool for Ruby.== ==Bundler is a gem to bundle gems.== It is an exit from dependency hell.&#x20;
+Finally, it records the exact versions that have been installed, so that others can install the exact same gems.==% 應該說，Bundler 是團隊開發協作用的。20230619 %== Bundler makes sure a Ruby app run the same code on every development, staging, and production machine. 
 
-Bundler makes sure a Ruby app run the same code on every development, staging, and production machine. ==It records the exact versions that have been installed, so that others can install the exact same gems.== ==% 應該說，Bundler 是團隊開發協作用的。20230619 %==
-
-Bundler 是工具名，而 bundle 是實際使用的命令；就像 Homebrew 是工具名，对应的命令是 brew；RubyGems是工具名，gem 是實際使用的命令。
+Bundler is not a technology specific to Rails. ==Bundler is a dependency management tool for Ruby.== ==Bundler is a gem to bundle gems.== It is an exit from dependency hell.
 
 ### How to install gems in your project?
 
@@ -206,16 +204,18 @@ The discrepancy you're seeing between the Ruby version (3.3.2) and the installat
    - RubyGems uses the minor version number for its directories. This means that even if your Ruby version is 3.3.2, the directory for gems is based on the minor version `3.3.0`. ==This approach helps in maintaining compatibility and reducing the need for multiple directories for patch-level changes.==
 
 2. **Installation Directory**:
-   - The installation directory `/opt/homebrew/lib/ruby/gems/3.3.0` is used for any Ruby 3.3.x installation. This includes all patch versions such as 3.3.1, 3.3.2, etc. It prevents redundancy and ensures that gems installed for one patch version can be used by another patch version within the same minor version.
+   - ==The installation directory `/opt/homebrew/lib/ruby/gems/3.3.0` is used for any Ruby 3.3.x installation.== This includes all patch versions such as 3.3.1, 3.3.2, etc. It prevents redundancy and ensures that gems installed for one patch version can be used by another patch version within the same minor version.
 
 3. **Consistency Across Patch Levels**:
    - By using the minor version directory (3.3.0) for all 3.3.x versions, RubyGems ensures that gems do not need to be reinstalled for each patch update. This approach is efficient and saves disk space.
 
-## 工具间的关系
+## **工具間的關係**
 
-Bundler 並不是獨立的用來取代 RubyGems 的新系統，而應被看作是對 RubyGems 的延伸。———— Bundler 讓庫兼容性問題在安裝時就暴露出來；並在每個項目內鎖定所有依賴庫的版本，免受系統上其他地方安裝 gem 的影響。
+Bundler 並不是獨立的用來取代 RubyGems 的新系統，而應被看作是對 RubyGems 的延伸。———— Bundler 讓庫兼容性問題在安裝時就暴露出來；並在每個項目內鎖定所有依賴庫的版本，==免受系統上其他地方安裝 gem 的影響==。
 
 同樣的道理，RubyGems 也無法取代程序中的 require 函數，只是讓它的使用更方便和準確。
+
+Bundler 是工具名，而 bundle 是實際使用的命令；就像 Homebrew 是工具名，对应的命令是 brew；RubyGems是工具名，gem 是實際使用的命令。
 
 ## Upgrade a Rails app
 
@@ -223,7 +223,7 @@ Bundler 並不是獨立的用來取代 RubyGems 的新系統，而應被看作�
 
 ==Note that the terminal commands will work only when you are inside the Rails application directory, otherwise, it will display the latest installed version of Rails on your system.== If the application is using a different version specified in the Gemfile, it may not be accurate.
 
-1\. Via the Gemfile.lock: The Gemfile.lock in a Rails application specifies the exact versions of each gem that the application is using. Look for the line specifying the rails gem version in this file.
+1\. Via the Gemfile.lock: ==The Gemfile.lock in a Rails application specifies the exact versions of each gem that the application is using.== Look for the line specifying the rails gem version in this file.
 
 2\. Via the command line: In the terminal, navigate to the directory of your Rails app and use the command `rails -v` . This will display the current version of Rails the application is using.
 
