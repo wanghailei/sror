@@ -40,6 +40,22 @@ end
 
 ```
 
+### One-line method
+
+#### the endless method
+
+```ruby
+def a_method_name(arg) = puts arg
+```
+
+
+
+```ruby
+def a_method_name; end
+```
+
+
+
 
 
 ## Kinds of Methods

@@ -39,7 +39,7 @@ my_proc = Proc.new { |x| puts x }
 [1, 2, 3].each(&my_proc)
 ```
 
-In this case, `my_proc` is a `Proc` object that encapsulates the block. The `&` operator is used to convert the `Proc` object back into a block when passing it to the `each` method.
+In this case, `my_proc` is a `Proc` object that encapsulates the block. ==The `&` operator is used to convert the `Proc` object back into a block== when passing it to the `each` method.
 
 In summary, while a block itself is not an object, a `Proc` is an object type that represents a block in Ruby, allowing for more flexibility in how the block is used.
 
@@ -70,7 +70,7 @@ When you use the `yield` keyword, the code inside the block will run to do its j
 
 A lambda is a way to define a block and its parameters with some special syntax. You can save this lambda into a variable for later use.
 
-A **Lambda** is created with `lambda {}` or `-> {}`.
+A **Lambda** is created with ==`lambda {}`== or `-> {}`.
 
 ```ruby
 say_something = -> { puts "This is a lambda." }
@@ -91,9 +91,9 @@ In general programming concepts, a lambda is ==a type of anonymous function==. T
 
 ## Proc
 
-A **Proc** is created with `proc {}` or `Proc.new {}`.
+A **Proc** is created with ==`proc {}`== or `Proc.new {}`.
 
-[Proc](https://ruby-doc.org/core-3.0.1/Proc.html) objects are *closures*, meaning they remember and can use the entire context in which they were created.
+==Proc objects are *closures*==, meaning they remember and can use the entire context in which they were created.
 
 ### The difference between a Proc and a Lambda
 
@@ -106,12 +106,12 @@ Lambdas are generally preferred when you need function-like behavior, while Proc
 **Argument Handling**: 
 
 - Lambdas check the number of arguments passed to them and will throw an error if the number of arguments does not match the expected number.
-- Procs are more flexible with arguments. If you pass the wrong number of arguments to a Proc, it won't complain. If it's missing arguments, they will be set to `nil`.
+- ==Procs are more flexible with arguments.== If you pass the wrong number of arguments to a Proc, it won't complain. If it's missing arguments, they will be set to `nil`.
 
 **Return Behavior**:
 
 - When you `return` from a Lambda, it returns control to the enclosing method, just like a regular method return.
-- When you `return` from a Proc, it does so immediately, without going back to the calling method. This is known as a non-local return.
+- ==When you `return` from a Proc, it does so immediately, without going back to the calling method.== This is known as a non-local return.
 
 These differences can lead to different behaviors in code. 
 
@@ -182,8 +182,6 @@ The `&:even?` is shorthand for a block `{ |i| i.even? }`.
 ==The `&` operator is used to convert the symbol `:even?` into a Proc object==, which is then passed to the `select!` method. It will allow us to call the method named `even?` on each element of the array.
 
 Since `!` is used after `select`, it modifies the original array itself.
-
-
 
 The `&` operator in Ruby is quite versatile and serves different purposes depending on the context, particularly when dealing with blocks, Procs, and methods.
 
