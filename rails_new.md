@@ -28,11 +28,18 @@ rails new appname -a=propshaft
 
 
 
-## Generate a new Rails app with --edge
+## Generate a new Rails app with --main
 
 `--dev` uses your locally checked-out Rails repository to create the app. 
 
 `--edge` will use the latest stable version from the Github repository, instead of from your locally installed Rails gem.
+
+`--main` generate a new Rails app that runs on Rails main branch from GitHub. 
+`rails new appname --main` will generate a `Gemfile` that has something like this inside:
+
+```
+gem "rails", github: "rails/rails", branch: "main"
+```
 
 ## .railsrc
 
@@ -40,15 +47,11 @@ rails new appname -a=propshaft
 --asset-pipeline=propshaft
 ```
 
-
-
 ## Rails
 
 $ sudo gem install rails
 
-$ rails new my-app --css tailwind -a propshaft
-
-Propshaft is an asset pipeline library for Rails. It's built for an era where bundling assets to save on HTTP connections is no longer urgent.
+$ rails new my-app
 
 ### How to run a Rails deposit on a new Mac.
 
@@ -60,24 +63,16 @@ $ rake assets:precompile
 
 
 
-\# When you're developing your application, you want to run Tailwind in watch mode, so changes are
+### Bundler Errors when rails new appname
 
-\# automatically reflected in the generated CSS output. You can do this either by running:
+```bash
+Bundler::DirectoryRemovalError: Could not delete previous installation of 
+`/opt/homebrew/lib/ruby/gems/3.3.0/gems/websocket-driver-0.7.6`.
+An error occurred while installing websocket-driver (0.7.6), and Bundler cannot continue.
+```
 
-$ rails tailwindcss:watch as a separate process,
+我的經驗是，用這個來嘗試解決：
 
-or by running:
+`gem pristine websocket-driver --version 0.7.6`
 
-$ ./bin/dev
-
-which uses foreman to starts both the Tailwind watch process and the rails server in development mode.
-
-#### Tailwind CSS for Rails
-
-$ rails tailwindcss:build
-
-\# This input file will be used to generate the output in app/assets/builds/tailwind.css.
-
-\# Error：The asset "tailwind.css" is not present in the asset pipeline.
-
-$ rake assets:precompile
+如果提示沒有寫權限，則加 sudo。

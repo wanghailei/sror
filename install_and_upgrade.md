@@ -69,11 +69,10 @@ For pkg-config to find ruby you may need to set:
 export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 ```
 
-
-
 我認為一般用 `brew` 升級Ruby就很好。但是我發現在 Ruby 3.3 發布一個星期之後，`brew` 都沒有更新到這個最新版。所以我不得不起用`rbenv`。等到 brew 的最新版 Ruby 發布了，再重新安裝並切換回 brew 的版本。因為對我來說，不同於其他的工具——可以用brew安裝，Ruby的最新版本對我來說很重要，所以它可以被單獨管理。
 
 ## Update Ruby with `rbenv`
+### Update Ruby with `rbenv`
 
 ```bash
 # list latest stable versions:
@@ -89,6 +88,10 @@ rbenv install 3.4.0-preview2
 # make 3.3.0 the defaul version on macOS
 rbenv global 3.3.0
 
+=======
+
+# make 3.3.0 the defaul version on macOS
+rbenv global 3.3.0
 ```
 
 ==After `rbenv install` and `rbenv global`, the ~/.zshrc need to be modified for `ruby` to take effect:==
@@ -97,9 +100,8 @@ rbenv global 3.3.0
 if command -v rbenv > /dev/null; then
 	eval "$(rbenv init -)"
 fi
-```
-
 It can be down in CLI with the following code.
+```
 
 ```zsh
 echo 'if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.zshrc
@@ -178,9 +180,12 @@ $ gem i bundler -v 2.4.13
 
 ```bash
 $ gem install <gemname>
+<<<<<<< HEAD
 
 // This will install the latest pre-release version of Rails, it could be a beta.
 $ gem install rails --pre 
+=======
+>>>>>>> ecde517b3863b9b891b64c90b253ee32b52728bc
 ```
 
 #### List installed gems
